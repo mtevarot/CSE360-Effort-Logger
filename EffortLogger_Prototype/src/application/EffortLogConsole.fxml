@@ -28,33 +28,32 @@
          </font>
       </Label>
       <SplitMenuButton fx:id="projectField" layoutX="76.0" layoutY="280.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="368.0">
-        <items>
-          <MenuItem fx:id="project1" mnemonicParsing="false" onAction="#menuItemAction" text="Matteo's Project" />
-		  <MenuItem fx:id="project2" mnemonicParsing="false" onAction="#menuItemAction" text="Anthony's Project" />
-
-        </items>
+         <items>
+            <MenuItem fx:id="project11" mnemonicParsing="false" onAction="#menuItemAction" text="Matteo's Project" />
+            <MenuItem fx:id="project21" mnemonicParsing="false" onAction="#menuItemAction" text="Anthony's Project" />
+         </items>
       </SplitMenuButton>
       <Label fx:id="projectTypeLabel" layoutX="391.0" layoutY="344.0" text="Project Type:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <SplitMenuButton fx:id="projectTypeField" layoutX="391.0" layoutY="366.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="447.0">
+      <SplitMenuButton fx:id="projectField3" layoutX="391.0" layoutY="366.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="447.0">
          <items>
-            <MenuItem mnemonicParsing="false" text="Project Plan" />
-            <MenuItem mnemonicParsing="false" text="Risk Management Plan" />
-            <MenuItem mnemonicParsing="false" text="Conceptual Design Plan" />
-            <MenuItem mnemonicParsing="false" text="Detailed Design Plan" />
-            <MenuItem mnemonicParsing="false" text="Implementation Plan" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction3" text="Project Plan" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction3" text="Risk Management Plan" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction3" text="Conceptual Design Plan" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction3" text="Detailed Design Plan" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction3" text="Implementation Plan" />
          </items>
       </SplitMenuButton>
-      <SplitMenuButton fx:id="effortCategoryField" layoutX="77.0" layoutY="366.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="287.0">
+      <SplitMenuButton fx:id="projectField2" layoutX="77.0" layoutY="366.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="287.0">
          <items>
-            <MenuItem mnemonicParsing="false" text="Plans" />
-            <MenuItem mnemonicParsing="false" text="Deliverables" />
-            <MenuItem mnemonicParsing="false" text="Interruptions" />
-            <MenuItem mnemonicParsing="false" text="Defects" />
-            <MenuItem mnemonicParsing="false" text="Others" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction2" text="Plans" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction2" text="Deliverables" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction2" text="Interruptions" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction2" text="Defects" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction2" text="Others" />
          </items>
       </SplitMenuButton>
       <Label fx:id="effortCategoryLabel" layoutX="77.0" layoutY="344.0" text="Effort Category ">
@@ -67,18 +66,18 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <SplitMenuButton fx:id="lifeCycleField" layoutX="488.0" layoutY="280.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="351.0">
+      <SplitMenuButton fx:id="projectField1" layoutX="488.0" layoutY="280.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="351.0">
          <items>
-            <MenuItem mnemonicParsing="false" text="Planning" />
-            <MenuItem mnemonicParsing="false" text="Information Gathering" />
-            <MenuItem mnemonicParsing="false" text="Information Understanding" />
-            <MenuItem mnemonicParsing="false" text="Verifying" />
-            <MenuItem mnemonicParsing="false" text="Outlining" />
-            <MenuItem mnemonicParsing="false" text="Drafting" />
-            <MenuItem mnemonicParsing="false" text="Finalizing" />
-            <MenuItem mnemonicParsing="false" text="Team Meeting" />
-            <MenuItem mnemonicParsing="false" text="Coach Meeting" />
-            <MenuItem mnemonicParsing="false" text="Stakeholder Meeting" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction1" text="Planning" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction1" text="Information Gathering" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction1" text="Information Understanding" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction1" text="Verifying" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction1" text="Outlining" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction1" text="Drafting" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction1" text="Finalizing" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction1" text="Team Meeting" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction1" text="Coach Meeting" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemAction1" text="Stakeholder Meeting" />
          </items>
       </SplitMenuButton>
       <Label fx:id="lifeCycleLabel" layoutX="488.0" layoutY="255.0" text="Life Cycle Step:">
