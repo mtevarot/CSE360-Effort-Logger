@@ -1,7 +1,6 @@
 package application;
 
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +46,44 @@ public class EffortLogConsoleController {
     
     @FXML 
     private Button backButton; 
-
+    
+    @FXML 
+    private Button effortLogEditorButton;
+    
+    @FXML
+    private Button defectLogButton; 
+    
+    public void goToDefectLog(ActionEvent event) throws IOException {
+    	if(!clockStatus()) {
+    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DefectLogConsole.fxml"));
+    	    Parent defectLogRoot = fxmlLoader.load();
+    	    
+    	    
+    	    Stage stage = (Stage) defectLogButton.getScene().getWindow();
+    	    stage.setScene(new Scene(defectLogRoot));
+    	    stage.setTitle("Defect Log Console");
+    	    stage.show();
+    	}
+    	else {
+    		showAlert("Error", "End the Activity Before Going to the Defect Log Console!"); 
+    	}
+    }
+    
+    public void goToEditor(ActionEvent event) throws IOException {
+    	if(!clockStatus()) {
+    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EffortLogEditor.fxml"));
+    	    Parent effortLogEditorRoot = fxmlLoader.load();
+    	    
+    	    
+    	    Stage stage = (Stage) effortLogEditorButton.getScene().getWindow();
+    	    stage.setScene(new Scene(effortLogEditorRoot));
+    	    stage.setTitle("Effort Log Editor");
+    	    stage.show();
+    	}
+    	else {
+    		showAlert("Error", "End the Activity Before Going to the Effort Log Editor!"); 
+    	}
+    }
     
     public void goBack(ActionEvent event) throws IOException {
     	if(!clockStatus()) {

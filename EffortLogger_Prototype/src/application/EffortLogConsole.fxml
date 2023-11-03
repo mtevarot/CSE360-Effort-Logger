@@ -85,12 +85,12 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="35.0" layoutY="565.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="203.0" text="Effort Log Editor">
+      <Button fx:id="effortLogEditorButton" layoutX="35.0" layoutY="565.0" mnemonicParsing="false" onAction="#goToEditor" prefHeight="39.0" prefWidth="203.0" text="Effort Log Editor">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="249.0" layoutY="565.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="203.0" text="Defect Log Console">
+      <Button fx:id="defectLogButton" layoutX="249.0" layoutY="565.0" mnemonicParsing="false" onAction="#goToDefectLog" prefHeight="39.0" prefWidth="203.0" text="Defect Log Console">
          <font>
             <Font size="18.0" />
          </font>
