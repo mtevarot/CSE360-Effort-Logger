@@ -28,16 +28,13 @@ public class LoginPageController {
 
             if (loginSuccessful) {
                 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EffortLogConsole.fxml"));
-                Parent effortLogConsoleRoot = fxmlLoader.load();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EffortLoggerV2Homepage.fxml"));
+                Parent effortLoggerV2HomepageRoot = fxmlLoader.load();
                 
-               
-                EffortLogConsoleController control = fxmlLoader.getController();
-                //control.setLogin(login);
-
+    
                 
                 Stage stage = (Stage) usernameField.getScene().getWindow();
-                stage.setScene(new Scene(effortLogConsoleRoot));
+                stage.setScene(new Scene(effortLoggerV2HomepageRoot));
                 stage.setTitle("Effort Log Console");
                 stage.show();
             } else {
