@@ -15,6 +15,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class EffortLogConsoleController {
 	@FXML
@@ -52,6 +54,10 @@ public class EffortLogConsoleController {
     
     @FXML
     private Button defectLogButton; 
+    
+    private LocalDateTime startTime; 
+    
+    private LocalDateTime stopTime; 
     
     public void goToDefectLog(ActionEvent event) throws IOException {
     	if(!clockStatus()) {
@@ -157,6 +163,7 @@ public class EffortLogConsoleController {
         
             clock.setFill(Color.GREEN);
             clockText.setText("CLOCK IS RUNNING");
+            startTime = LocalDateTime.now();
     }
     
     public boolean clockStatus() {
@@ -173,6 +180,9 @@ public class EffortLogConsoleController {
         projectField1.setText("");
         projectField2.setText("");
         projectField3.setText("");
+        stopTime = LocalDateTime.now();
+        
+        saveTime(startTime, stopTime);
     }
     
     private void showAlert(String title, String content) {
@@ -182,4 +192,13 @@ public class EffortLogConsoleController {
 		alert.setContentText(content);
 		alert.showAndWait();
 	}
+    
+    private void saveTime(LocalDateTime start, LocalDateTime stop) {
+    	String startf = start.format(formatter);
+    	String stopf = stop.format(formatter);
+    	
+    	System.out.println("Start Time: " + startf + "\nStop Time: " + stopf);
+    }
+    
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 }
