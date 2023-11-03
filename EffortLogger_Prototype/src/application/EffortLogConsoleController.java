@@ -1,7 +1,12 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,6 +15,7 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 public class EffortLogConsoleController {
 	@FXML
@@ -38,7 +44,27 @@ public class EffortLogConsoleController {
     
     @FXML
     private SplitMenuButton projectField3;
+    
+    @FXML 
+    private Button backButton; 
 
+    
+    public void goBack(ActionEvent event) throws IOException {
+    	if(!clockStatus()) {
+    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EffortLoggerV2Homepage.fxml"));
+    	    Parent effortLogConsoleRoot = fxmlLoader.load();
+    	    
+    	    
+    	    Stage stage = (Stage) backButton.getScene().getWindow();
+    	    stage.setScene(new Scene(effortLogConsoleRoot));
+    	    stage.setTitle("Effort Log Console");
+    	    stage.show();
+    	}
+    	else {
+    		showAlert("Error", "End the Activity Before Going Back!"); 
+    	}
+    }
+    
     public void menuItemAction(ActionEvent event) {
         updateSplitMenuButtonText(((MenuItem) event.getSource()).getText());
     }

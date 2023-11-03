@@ -16,13 +16,13 @@ public class EffortLoggerV2HomepageController {
 	
 	public void goToConsole() throws IOException {
 		
-	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EffortLogConsole.fxml"));
-    Parent effortLogConsoleRoot = fxmlLoader.load();
-    
-    
-    Stage stage = (Stage) effortLoggerConsoleButton.getScene().getWindow();
-    stage.setScene(new Scene(effortLogConsoleRoot));
-    stage.setTitle("Effort Log Console");
-    stage.show();
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EffortLogConsole.fxml"));
+	    Parent effortLogConsoleRoot = fxmlLoader.load();
+	    
+	    
+	    Stage stage = (Stage) effortLoggerConsoleButton.getScene().getWindow();
+	    stage.setScene(new Scene(effortLogConsoleRoot));
+	    stage.setTitle("Effort Log Console");
+	    stage.show();
 	}
 }
