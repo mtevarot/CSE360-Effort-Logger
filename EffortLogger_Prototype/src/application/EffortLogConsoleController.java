@@ -174,15 +174,22 @@ public class EffortLogConsoleController {
     }
     
     public void stopActivity() {
+    	if(clockStatus()) {
     	clock.setFill(Color.RED);
         clockText.setText("CLOCK IS STOPPED");
         projectField.setText("");
         projectField1.setText("");
         projectField2.setText("");
         projectField3.setText("");
+       
         stopTime = LocalDateTime.now();
         
         saveTime(startTime, stopTime);
+    	}
+    	else
+    	{
+    		showAlert("Error", "Start an Activity First!");
+    	}
     }
     
     private void showAlert(String title, String content) {
