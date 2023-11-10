@@ -22,6 +22,19 @@ public class EffortLoggerV2HomepageController {
 	@FXML 
 	private Button logOutButton; 
 	
+	@FXML 
+	private Button planningPokerButton; 
+	
+	public void goToPlanningPoker(ActionEvent event) throws IOException { 
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlanningPoker.fxml"));
+        Parent planningPokerRoot = fxmlLoader.load();
+        
+        Stage stage = (Stage) logOutButton.getScene().getWindow();
+        stage.setScene(new Scene(planningPokerRoot));
+        stage.setTitle("Planning Poker Console");
+        stage.show();
+	}
+	
 	public void goToConsole() throws IOException {
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EffortLogConsole.fxml"));

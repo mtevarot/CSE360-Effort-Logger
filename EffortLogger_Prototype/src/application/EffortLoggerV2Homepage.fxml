@@ -20,7 +20,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="planningPokerButton" layoutX="327.0" layoutY="274.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="241.0" text="Planning Poker">
+      <Button fx:id="planningPokerButton" layoutX="327.0" layoutY="274.0" mnemonicParsing="false" onAction="#goToPlanningPoker" prefHeight="57.0" prefWidth="241.0" text="Planning Poker">
          <font>
             <Font size="18.0" />
          </font>
