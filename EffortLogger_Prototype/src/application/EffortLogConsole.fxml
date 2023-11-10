@@ -56,7 +56,7 @@
             <MenuItem mnemonicParsing="false" onAction="#menuItemAction2" text="Others" />
          </items>
       </SplitMenuButton>
-      <Label fx:id="effortCategoryLabel" layoutX="77.0" layoutY="344.0" text="Effort Category ">
+      <Label fx:id="effortCategoryLabel" layoutX="77.0" layoutY="344.0" text="Effort Category:">
          <font>
             <Font size="14.0" />
          </font>
@@ -95,12 +95,12 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="458.0" layoutY="565.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="203.0" text="Definitions">
+      <Button layoutX="461.0" layoutY="565.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="203.0" text="Definitions">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="677.0" layoutY="565.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="203.0" text="Effect and Defect Logs">
+      <Button layoutX="674.0" layoutY="565.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="203.0" text="Effect and Defect Logs">
          <font>
             <Font size="18.0" />
          </font>

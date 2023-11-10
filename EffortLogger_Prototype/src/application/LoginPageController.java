@@ -41,9 +41,7 @@ public class LoginPageController {
                 stage.setScene(new Scene(effortLoggerV2HomepageRoot));
                 stage.setTitle("Effort Log Console");
                 stage.show();
-            } else {
-                showAlert("Error", "Incorrect username or password, please try again.");
-            }
+            } 
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Error", "An error occurred while loading the next screen. ");

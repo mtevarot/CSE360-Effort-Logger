@@ -68,7 +68,7 @@ public class MySQLAccess {
              resultSet = preparedStatement.executeQuery();
              
              if(!resultSet.isBeforeFirst()) { 
-            	 showAlert("Error", "Username or Password is Incorrect"); 
+            	 showAlert("Error", "Incorrect username or password, please try again."); 
              } else {
             	 while(resultSet.next()) {
             		 String retrievedPassword = resultSet.getString("password"); 
