@@ -192,7 +192,7 @@ public class EffortLogConsoleController {
     	}
     }
     
-    private void showAlert(String title, String content) {
+    public void showAlert(String title, String content) {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle(title);
 		alert.setHeaderText(null);

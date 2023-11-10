@@ -12,7 +12,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="904.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EffortLogEditorController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fcfcfc" height="74.0" layoutX="19.0" layoutY="29.0" stroke="BLACK" strokeType="INSIDE" width="867.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="504.0" layoutX="19.0" layoutY="127.0" stroke="BLACK" strokeType="INSIDE" width="867.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="504.0" layoutX="19.0" layoutY="115.0" stroke="BLACK" strokeType="INSIDE" width="867.0" />
       <Label alignment="CENTER" layoutX="19.0" layoutY="29.0" prefHeight="74.0" prefWidth="867.0" text="EFFORT LOG EDITOR">
          <font>
             <Font size="36.0" />
@@ -111,20 +111,21 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="51.0" layoutY="572.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="383.0" text="Split this into Two Entries">
+      <Button layoutX="51.0" layoutY="561.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="383.0" text="Split this into Two Entries">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="backToConsoleButton" layoutX="486.0" layoutY="572.0" mnemonicParsing="false" onAction="#backToConsole" prefHeight="39.0" prefWidth="383.0" text="Proceed to Effort Log Console">
+      <Button fx:id="backToConsoleButton" layoutX="486.0" layoutY="561.0" mnemonicParsing="false" onAction="#backToConsole" prefHeight="39.0" prefWidth="383.0" text="Proceed to Effort Log Console">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label layoutX="52.0" layoutY="542.0" text="3.b. Split the Current Effort Log Entry into two entries">
+      <Label layoutX="55.0" layoutY="536.0" text="3.b. Split the Current Effort Log Entry into two entries">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
+      <Button fx:id="backButton1" layoutX="33.0" layoutY="629.0" mnemonicParsing="false" onAction="#backToConsole" prefHeight="25.0" prefWidth="203.0" text="Back" />
    </children>
 </AnchorPane>

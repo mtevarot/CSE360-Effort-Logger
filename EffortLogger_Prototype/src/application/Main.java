@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import java.sql.*; 
 
 
 public class Main extends Application {
@@ -16,10 +17,13 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("EffortLogger Login");
 			primaryStage.show();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	public static void main(String[] args) {
 		launch(args);

@@ -1,5 +1,13 @@
 package application;
 
+import java.io.IOException;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 public class Login {
 	private String name; 
 	private String password; 
@@ -20,8 +28,8 @@ public class Login {
 		return this.password; 
 	}
 	
-	public boolean validateLogin(String u, String p) {
-		if("d".equals(u) && "d".equals(p))
+	public boolean validateLogin(String u, String p) throws Exception {	
+		if(MySQLAccess.logInUser(u, p))
 		{
 			return true;
 		}
