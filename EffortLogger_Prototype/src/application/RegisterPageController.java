@@ -39,7 +39,7 @@ public class RegisterPageController {
 		    showAlert("Error", "Please fill in all fields.");
 		    return;
 		}
-		if (passwordField.getText() != passwordField1.getText()) { 
+		if (!passwordField.getText().equals(passwordField1.getText())) { 
 			showAlert("Error", "Passwords Do Not Match");
 			return; 
 		}

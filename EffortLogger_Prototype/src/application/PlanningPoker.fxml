@@ -17,18 +17,18 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <ComboBox layoutX="78.0" layoutY="214.0" prefHeight="25.0" prefWidth="354.0" />
+      <ComboBox fx:id="userComboBox" layoutX="78.0" layoutY="214.0" prefHeight="25.0" prefWidth="354.0" />
       <Label layoutX="78.0" layoutY="175.0" prefHeight="25.0" prefWidth="297.0" text="1.  Select User and Import User Data">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button layoutX="78.0" layoutY="259.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="209.0" text="Import Data">
+      <Button fx:id="importDataButton" layoutX="78.0" layoutY="259.0" mnemonicParsing="false" onAction="#importData" prefHeight="25.0" prefWidth="209.0" text="Import Data">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="525.0" layoutY="259.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="209.0" text="View User Story">
+      <Button fx:id="viewUserStoryButton" layoutX="525.0" layoutY="259.0" mnemonicParsing="false" onAction="#viewUserStory" prefHeight="25.0" prefWidth="209.0" text="View User Story">
          <font>
             <Font size="18.0" />
          </font>
@@ -39,52 +39,52 @@
          </font>
       </Label>
       <ComboBox fx:id="userStoriesComboBox" layoutX="525.0" layoutY="214.0" prefHeight="25.0" prefWidth="354.0" />
-      <Button layoutX="58.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="1">
+      <Button fx:id="button1" layoutX="58.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="1">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
-      <Button layoutX="146.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="2">
+      <Button fx:id="button2" layoutX="146.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="2">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
-      <Button layoutX="324.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="4">
+      <Button fx:id="button4" layoutX="324.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="4">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
-      <Button layoutX="235.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="3">
+      <Button fx:id="button3" layoutX="235.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="3">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
-      <Button layoutX="680.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="8">
+      <Button fx:id="button8" layoutX="680.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="8">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
-      <Button layoutX="593.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="7">
+      <Button fx:id="button7" layoutX="593.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="7">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
-      <Button layoutX="497.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="6">
+      <Button fx:id="button6" layoutX="497.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="6">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
-      <Button layoutX="408.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="5">
+      <Button fx:id="button5" layoutX="408.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="5">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
-      <Button layoutX="768.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="9">
+      <Button fx:id="button9" layoutX="768.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="9">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
-      <Button layoutX="855.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" style="-fx-padding: 0;" text="10">
+      <Button fx:id="button10" layoutX="855.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" style="-fx-padding: 0;" text="10">
          <font>
             <Font size="36.0" />
          </font>
@@ -99,7 +99,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button layoutX="110.0" layoutY="502.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="209.0" text="Generate an Estimate">
+      <Button fx:id="generateEstimateButton" layoutX="110.0" layoutY="502.0" mnemonicParsing="false" onAction="#generateEstimate" prefHeight="25.0" prefWidth="209.0" text="Generate an Estimate">
          <font>
             <Font size="18.0" />
          </font>
@@ -109,12 +109,12 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button layoutX="110.0" layoutY="584.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="354.0" text="End Planning Poker Meeting">
+      <Button fx:id="endMeetingButton" layoutX="110.0" layoutY="584.0" mnemonicParsing="false" onAction="#meetingEnded" prefHeight="39.0" prefWidth="354.0" text="End Planning Poker Meeting">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="503.0" layoutY="584.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="354.0" text="Next Round">
+      <Button fx:id="newRoundButton" layoutX="503.0" layoutY="584.0" mnemonicParsing="false" onAction="#newRound" prefHeight="39.0" prefWidth="354.0" text="Next Round">
          <font>
             <Font size="18.0" />
          </font>

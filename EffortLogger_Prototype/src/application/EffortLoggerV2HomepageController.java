@@ -73,4 +73,5 @@ public class EffortLoggerV2HomepageController {
 	public void quit() throws IOException {
 		Platform.exit();
 	}
+	
 }

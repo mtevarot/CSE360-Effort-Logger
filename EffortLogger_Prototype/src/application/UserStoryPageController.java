@@ -42,7 +42,7 @@ public class UserStoryPageController {
 	
 	public void showUserStoryCreatedAlert() {
 	    Alert alert = new Alert(Alert.AlertType.INFORMATION, "User Story Created!", ButtonType.OK);
-	    alert.setTitle("Confirmation");
+	    alert.setTitle("Message");
 	    alert.setHeaderText(null); 
 
 	    

@@ -117,7 +117,6 @@ public class MySQLAccess {
             		 }
             	 }
              }
-
         } catch (Exception e) {
             throw e;
         } finally {
