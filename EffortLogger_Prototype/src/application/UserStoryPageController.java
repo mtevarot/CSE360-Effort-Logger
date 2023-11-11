@@ -3,6 +3,8 @@ package application;
 import java.io.IOException;
 import java.util.Optional;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +14,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class UserStoryPageController {
 		
@@ -32,15 +34,31 @@ public class UserStoryPageController {
 	private TextField keyWordsField; 
 	
 	@FXML 
-	private TextArea descriptionField; 
+	private TextField descriptionField; 
 	
 	@FXML 
 	private Button createStoryButton; 
+	
+	
+	public void showUserStoryCreatedAlert() {
+	    Alert alert = new Alert(Alert.AlertType.INFORMATION, "User Story Created!", ButtonType.OK);
+	    alert.setTitle("Confirmation");
+	    alert.setHeaderText(null); 
+
+	    
+	    Platform.runLater(alert::show);
+
+	    
+	    PauseTransition delay = new PauseTransition(Duration.seconds(2));
+	    delay.setOnFinished(event -> alert.close());
+	    delay.play();
+	}
 	
 	public void createStory(ActionEvent event) throws Exception { 
 		if(!titleField.getText().isEmpty() && !keyWordsField.getText().isEmpty() && !descriptionField.getText().isEmpty()) {
 			MySQLAccess.createUserStory(titleField.getText(), keyWordsField.getText(), descriptionField.getText()); 
 			
+			showUserStoryCreatedAlert(); 
 			clearStory(); 
 		} else {
 			showAlert("Error", "Please Fill Out All Sections Before Creating User Story");
