@@ -10,9 +10,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1015.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RegisterPageController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="363.0" layoutX="269.0" layoutY="193.0" stroke="BLACK" strokeType="INSIDE" width="482.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="627.0" layoutX="34.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="943.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="102.0" layoutX="259.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" width="499.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="627.0" layoutX="34.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="943.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="102.0" layoutX="259.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" width="499.0" />
       <TextField fx:id="firstNameField" layoutX="314.0" layoutY="216.0" prefHeight="36.0" prefWidth="393.0" />
       <Label layoutX="314.0" layoutY="171.0" prefHeight="45.0" prefWidth="194.0" text="First and Last Name:">
          <font>

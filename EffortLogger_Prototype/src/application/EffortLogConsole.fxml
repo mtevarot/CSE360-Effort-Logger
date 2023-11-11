@@ -10,8 +10,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="904.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EffortLogConsoleController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fcfcfc" height="74.0" layoutX="21.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="867.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="516.0" layoutX="22.0" layoutY="105.0" stroke="BLACK" strokeType="INSIDE" width="867.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#fcfcfc" height="74.0" layoutX="21.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="867.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="516.0" layoutX="22.0" layoutY="105.0" stroke="BLACK" strokeType="INSIDE" width="867.0" />
       <Label layoutX="238.0" layoutY="33.0" prefHeight="55.0" prefWidth="439.0" text="EFFORT LOGGER CONSOLE">
          <font>
             <Font size="36.0" />

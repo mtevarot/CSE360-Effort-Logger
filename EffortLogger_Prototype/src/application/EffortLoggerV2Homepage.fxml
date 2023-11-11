@@ -8,8 +8,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="904.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EffortLoggerV2HomepageController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fcfcfc" height="74.0" layoutX="19.0" layoutY="29.0" stroke="BLACK" strokeType="INSIDE" width="867.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="504.0" layoutX="14.0" layoutY="119.0" stroke="BLACK" strokeType="INSIDE" width="867.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#fcfcfc" height="74.0" layoutX="19.0" layoutY="29.0" stroke="BLACK" strokeType="INSIDE" width="867.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="504.0" layoutX="19.0" layoutY="120.0" stroke="BLACK" strokeType="INSIDE" width="867.0" />
       <Label alignment="CENTER" layoutX="19.0" layoutY="29.0" prefHeight="74.0" prefWidth="867.0" text="EFFORT LOGGER V2 HOMEPAGE">
          <font>
             <Font size="36.0" />
@@ -30,7 +30,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="327.0" layoutY="494.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="241.0" text="Definitions">
+      <Button fx:id="userStoriesButton" layoutX="327.0" layoutY="494.0" mnemonicParsing="false" onAction="#gotoUserStories" prefHeight="57.0" prefWidth="241.0" text="User Stories">
          <font>
             <Font size="18.0" />
          </font>

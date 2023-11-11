@@ -25,6 +25,19 @@ public class EffortLoggerV2HomepageController {
 	@FXML 
 	private Button planningPokerButton; 
 	
+	@FXML 
+	private Button userStoriesButton; 
+	
+	public void gotoUserStories(ActionEvent event) throws IOException { 
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UserStoryPage.fxml"));
+        Parent userStoryRoot = fxmlLoader.load();
+        
+        Stage stage = (Stage) userStoriesButton.getScene().getWindow();
+        stage.setScene(new Scene(userStoryRoot));
+        stage.setTitle("User Story Console");
+        stage.show();
+	}
+	
 	public void goToPlanningPoker(ActionEvent event) throws IOException { 
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlanningPoker.fxml"));
         Parent planningPokerRoot = fxmlLoader.load();
