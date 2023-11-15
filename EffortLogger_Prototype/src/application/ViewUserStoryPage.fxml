@@ -17,10 +17,11 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <Button fx:id="quitButton" layoutX="745.0" layoutY="574.0" mnemonicParsing="false" onAction="#quit" prefHeight="48.0" prefWidth="155.0" text="Back To Meeting">
+      <Button fx:id="quitButton" layoutX="745.0" layoutY="574.0" mnemonicParsing="false" onAction="#quit" prefHeight="48.0" prefWidth="155.0" text="Back">
          <font>
-            <Font size="14.0" />
-         </font></Button>
+            <Font size="16.0" />
+         </font>
+      </Button>
       <Label layoutX="81.0" layoutY="213.0" text="Title:">
          <font>
             <Font size="16.0" />
@@ -34,7 +35,8 @@
       <TextArea fx:id="descriptionArea" editable="false" layoutX="82.0" layoutY="309.0" prefHeight="251.0" prefWidth="835.0">
          <font>
             <Font size="14.0" />
-         </font></TextArea>
+         </font>
+      </TextArea>
       <Label layoutX="81.0" layoutY="274.0" text="Description:">
          <font>
             <Font size="16.0" />
@@ -43,10 +45,12 @@
       <TextArea fx:id="titleArea" editable="false" layoutX="130.0" layoutY="207.0" prefHeight="25.0" prefWidth="223.0">
          <font>
             <Font size="14.0" />
-         </font></TextArea>
+         </font>
+      </TextArea>
       <TextArea fx:id="keywordsArea" editable="false" layoutX="600.0" layoutY="207.0" prefHeight="46.0" prefWidth="223.0" style="-fx-padding: 0;">
          <font>
             <Font size="14.0" />
-         </font></TextArea>
+         </font>
+      </TextArea>
    </children>
 </AnchorPane>

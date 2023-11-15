@@ -25,7 +25,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="327.0" layoutY="383.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="241.0" text="Historical Logs">
+      <Button fx:id="historicalLogsButton" layoutX="327.0" layoutY="383.0" mnemonicParsing="false" onAction="#goToHistoricalLogs" prefHeight="57.0" prefWidth="241.0" text="Historical Logs">
          <font>
             <Font size="18.0" />
          </font>

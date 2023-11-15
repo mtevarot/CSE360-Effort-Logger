@@ -28,6 +28,19 @@ public class EffortLoggerV2HomepageController {
 	@FXML 
 	private Button userStoriesButton; 
 	
+	@FXML 
+	private Button historicalLogsButton; 
+	
+	public void goToHistoricalLogs(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewOldEffortLogs.fxml"));
+        Parent effortLogsRoot = fxmlLoader.load();
+        
+        Stage stage = (Stage) userStoriesButton.getScene().getWindow();
+        stage.setScene(new Scene(effortLogsRoot));
+        stage.setTitle("Historical Logs");
+        stage.show();
+	}
+	
 	public void gotoUserStories(ActionEvent event) throws IOException { 
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UserStoryPage.fxml"));
         Parent userStoryRoot = fxmlLoader.load();

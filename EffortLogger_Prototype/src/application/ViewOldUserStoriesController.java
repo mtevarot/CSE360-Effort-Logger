@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -19,8 +18,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -33,24 +30,24 @@ public class ViewOldUserStoriesController {
 	@FXML
 	private ListView<String> userStoriesListView;
 	
-	 @FXML
-	 public void initialize() {
-		 Platform.runLater(() -> {
-			 populateUserStoriesListView();
-		    });
-		 
-	        userStoriesListView.setOnMouseClicked(event -> {
-	            if(event.getClickCount() == 2) {
-	                viewUserStory();
-	            }
-	        });
-	       
-	    }
+	@FXML
+	public void initialize() {
+	 Platform.runLater(() -> {
+		 populateUserStoriesListView();
+	    });
 	 
-	 public void populateUserStoriesListView() {
-	        List<String> userStoryTitles = getUserStoryTitles();
-	        userStoriesListView.setItems(FXCollections.observableArrayList(userStoryTitles));
-	    }
+        userStoriesListView.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 2) {
+                viewUserStory();
+            }
+        });
+       
+    }
+ 
+	public void populateUserStoriesListView() {
+        List<String> userStoryTitles = getUserStoryTitles();
+        userStoriesListView.setItems(FXCollections.observableArrayList(userStoryTitles));
+    }
 	
 	public void viewUserStory() {
 	    try {
@@ -149,7 +146,7 @@ public class ViewOldUserStoriesController {
         
         Stage stage = (Stage) backToHomepageButton.getScene().getWindow();
         stage.setScene(new Scene(backToHomepageRoot));
-        stage.setTitle("User Story Console");
+        stage.setTitle("Effort Logger V2 Homepage");
         stage.show();
 	}
 	

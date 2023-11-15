@@ -1,6 +1,13 @@
 package application;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
@@ -17,6 +25,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class EffortLogConsoleController {
 	@FXML
@@ -35,7 +45,7 @@ public class EffortLogConsoleController {
     private Label clockText; 
     
     @FXML
-    private SplitMenuButton projectField;
+    private ComboBox projectField;
     
     @FXML
     private SplitMenuButton projectField1;
@@ -59,6 +69,17 @@ public class EffortLogConsoleController {
     
     private LocalDateTime stopTime; 
     
+   
+    @FXML
+    public void initialize() {
+        populateProjectField();
+    }
+    
+    public void populateProjectField() {
+        ObservableList<String> projectTitles = getProjectTitlesFromDatabase();
+        projectField.setItems(projectTitles);
+    }
+    
     public void goToDefectLog(ActionEvent event) throws IOException {
     	if(!clockStatus()) {
     		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DefectLogConsole.fxml"));
@@ -73,6 +94,36 @@ public class EffortLogConsoleController {
     	else {
     		showAlert("Error", "End the Activity Before Going to the Defect Log Console!"); 
     	}
+    }
+    
+    public ObservableList<String> getProjectTitlesFromDatabase() {
+        ObservableList<String> titles = FXCollections.observableArrayList();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
+            String query = "SELECT DISTINCT project_name FROM effort_logs";
+            preparedStatement = connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                titles.add(resultSet.getString("project_name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return titles;
     }
     
     public void goToEditor(ActionEvent event) throws IOException {
@@ -107,9 +158,6 @@ public class EffortLogConsoleController {
     	}
     }
     
-    public void menuItemAction(ActionEvent event) {
-        updateSplitMenuButtonText(((MenuItem) event.getSource()).getText());
-    }
     
     public void menuItemAction1(ActionEvent event) {
         updateSplitMenuButtonText1(((MenuItem) event.getSource()).getText());
@@ -123,14 +171,6 @@ public class EffortLogConsoleController {
         updateSplitMenuButtonText3(((MenuItem) event.getSource()).getText());
     }
 
-    public void updateSplitMenuButtonText(String text) {
-    	if(clockStatus()) {
-    		projectField.setText(text);
-    	}
-    	else {
-    		showAlert("Error", "Start an Activity First!");
-    	}
-    }
     
     public void updateSplitMenuButtonText1(String text) {
     	if(clockStatus()) {
@@ -174,22 +214,59 @@ public class EffortLogConsoleController {
     }
     
     public void stopActivity() {
-    	if(clockStatus()) {
-    	clock.setFill(Color.RED);
-        clockText.setText("CLOCK IS STOPPED");
-        projectField.setText("");
-        projectField1.setText("");
-        projectField2.setText("");
-        projectField3.setText("");
-       
-        stopTime = LocalDateTime.now();
-        
-        saveTime(startTime, stopTime);
-    	}
-    	else
-    	{
-    		showAlert("Error", "Start an Activity First!");
-    	}
+        if (clockStatus()) {
+            clock.setFill(Color.RED);
+            clockText.setText("CLOCK IS STOPPED");
+
+            stopTime = LocalDateTime.now();
+
+            saveTime(startTime, stopTime);
+            saveEffortLogData(
+                projectField.getEditor().getText(),
+                projectField1.getText(),
+                projectField2.getText(),
+                projectField3.getText(),
+                startTime,
+                stopTime
+            );
+
+            projectField.setPromptText("");
+            projectField1.setText("");
+            projectField2.setText("");
+            projectField3.setText("");
+        } else {
+            showAlert("Error", "Start an Activity First!");
+        }
+    }
+    
+    public void saveEffortLogData(String projectName, String lifeCycleStep, String effortCategory, String projectType, LocalDateTime startTime, LocalDateTime endTime) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
+            String query = "INSERT INTO effort_logs (project_name, life_cycle_step, effort_category, project_type, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, projectName);
+            preparedStatement.setString(2, lifeCycleStep);
+            preparedStatement.setString(3, effortCategory);
+            preparedStatement.setString(4, projectType);
+            preparedStatement.setTimestamp(5, Timestamp.valueOf(startTime));
+            preparedStatement.setTimestamp(6, Timestamp.valueOf(endTime));
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
     
     public void showAlert(String title, String content) {
@@ -203,8 +280,6 @@ public class EffortLogConsoleController {
     private void saveTime(LocalDateTime start, LocalDateTime stop) {
     	String startf = start.format(formatter);
     	String stopf = stop.format(formatter);
-    	
-    	System.out.println("Start Time: " + startf + "\nStop Time: " + stopf);
     }
     
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
