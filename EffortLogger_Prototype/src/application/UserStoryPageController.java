@@ -39,7 +39,19 @@ public class UserStoryPageController {
 	@FXML 
 	private Button createStoryButton; 
 	
+	@FXML 
+	private Button viewOldStoriesButton; 
 	
+	public void viewOldStories() throws IOException { 
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewOldStories.fxml"));
+        Parent viewOldStoriesRoot = fxmlLoader.load();
+        
+        Stage stage = (Stage) viewOldStoriesButton.getScene().getWindow();
+        stage.setScene(new Scene(viewOldStoriesRoot));
+        stage.setTitle("View Old User Stories");
+        stage.show();
+	}
+
 	public void showUserStoryCreatedAlert() {
 	    Alert alert = new Alert(Alert.AlertType.INFORMATION, "User Story Created!", ButtonType.OK);
 	    alert.setTitle("Message");
