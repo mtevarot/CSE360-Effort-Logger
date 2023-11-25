@@ -18,6 +18,36 @@ public class MySQLAccess {
     ResultSet resultSet = null; 
 
     
+    public static int getUserIdByUsername(String username) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958");
+            String query = "SELECT user_id FROM users WHERE username = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt("user_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return -1; 
+    }
+
+    
     public void signUpUser(String username, String password, String firstAndLast) throws Exception {
         try {
         
@@ -55,7 +85,7 @@ public class MySQLAccess {
         }
     }
     
-    public static void createUserStory(String title, String keyWords, String description) throws Exception {
+    public static void createUserStory(String title, String keyWords, String description, int userId) throws Exception {
     	Connection connection = null;
     	PreparedStatement psInsert = null;  
     	ResultSet resultSet = null; 
@@ -63,12 +93,13 @@ public class MySQLAccess {
     	try { 
             connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
             
-            String sql = "INSERT INTO user_stories (title, `key words`, description) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO user_stories (title, `key words`, description, user_id) VALUES (?, ?, ?, ?)";
             psInsert = connection.prepareStatement(sql);
             
             psInsert.setString(1, title);
             psInsert.setString(2, keyWords);
             psInsert.setString(3, description);
+            psInsert.setInt(4, userId);
             
             psInsert.executeUpdate();
             

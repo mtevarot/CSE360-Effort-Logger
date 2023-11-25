@@ -132,10 +132,10 @@ public class PlanningPokerController {
 	        if (selectedStoryTitle == null || selectedStoryTitle.isEmpty()) {
 	            showAlert("Error", "Select A User Story Before Viewing.");
 	        } else {
-	            // Perform a database query to retrieve the story details
+	            
 	            UserStory userStory = getUserStoryDetails(selectedStoryTitle);
 
-	            // Proceed only if we have the details
+	          
 	            if (userStory != null) {
 	                FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewUserStoryPage.fxml"));
 	                Parent root = loader.load();
@@ -190,8 +190,10 @@ public class PlanningPokerController {
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
-            String query = "SELECT title FROM user_stories";
+            String query = "SELECT title FROM user_stories WHERE user_id = ?";
             preparedStatement = connection.prepareStatement(query);
+            
+            preparedStatement.setInt(1, CurrentUser.getUserId());
             resultSet = preparedStatement.executeQuery();
 
             userStoriesComboBox.getItems().clear();

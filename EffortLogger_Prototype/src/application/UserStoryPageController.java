@@ -43,6 +43,7 @@ public class UserStoryPageController {
 	private Button viewOldStoriesButton; 
 	
 	public void viewOldStories() throws IOException { 
+		int userId = CurrentUser.getUserId();
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewOldStories.fxml"));
         Parent viewOldStoriesRoot = fxmlLoader.load();
         
@@ -68,7 +69,9 @@ public class UserStoryPageController {
 	
 	public void createStory(ActionEvent event) throws Exception { 
 		if(!titleField.getText().isEmpty() && !keyWordsField.getText().isEmpty() && !descriptionField.getText().isEmpty()) {
-			MySQLAccess.createUserStory(titleField.getText(), keyWordsField.getText(), descriptionField.getText()); 
+			int userId = CurrentUser.getUserId();
+			
+			MySQLAccess.createUserStory(titleField.getText(), keyWordsField.getText(), descriptionField.getText(), userId); 
 			
 			showUserStoryCreatedAlert(); 
 			clearStory(); 

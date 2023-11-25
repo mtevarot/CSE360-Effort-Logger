@@ -32,6 +32,8 @@ public class LoginPageController {
 
             if (loginSuccessful) {
                 
+            	int userId = login.getUserId(usernameField.getText());
+                if (userId != -1) CurrentUser.setUserId(userId);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EffortLoggerV2Homepage.fxml"));
                 Parent effortLoggerV2HomepageRoot = fxmlLoader.load();
                 

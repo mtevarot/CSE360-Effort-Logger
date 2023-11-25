@@ -10,8 +10,9 @@ public class EffortLog {
     private String projectType;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+	private int user_id;
 
-    public EffortLog(int id, String projectName, String lifeCycleStep, String effortCategory, String projectType, LocalDateTime startTime, LocalDateTime endTime) {
+    public EffortLog(int id, String projectName, String lifeCycleStep, String effortCategory, String projectType, LocalDateTime startTime, LocalDateTime endTime, int user_id) {
         this.id = id;
         this.projectName = projectName;
         this.lifeCycleStep = lifeCycleStep;
@@ -19,6 +20,7 @@ public class EffortLog {
         this.projectType = projectType;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.user_id = user_id; 
     }
 
     public int getId() {

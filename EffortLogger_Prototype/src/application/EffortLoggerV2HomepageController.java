@@ -74,6 +74,7 @@ public class EffortLoggerV2HomepageController {
 	}
 	
 	public void logOut(ActionEvent event) throws IOException{ 
+		CurrentUser.logout(); 
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
         Parent loginPageRoot = fxmlLoader.load();
         
