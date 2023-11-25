@@ -94,7 +94,7 @@ public class PlanningPokerController {
 	        try {
 				goBack();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			} 
 	    });
@@ -161,7 +161,7 @@ public class PlanningPokerController {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
             String query = "SELECT firstAndLast FROM users";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
@@ -189,7 +189,7 @@ public class PlanningPokerController {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
             String query = "SELECT title FROM user_stories";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
@@ -277,7 +277,7 @@ public class PlanningPokerController {
 	    UserStory userStory = null;
 
 	    try {
-	        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
+	        connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
 	        String query = "SELECT title, `key words`, description FROM user_stories WHERE title = ?";
 	        preparedStatement = connection.prepareStatement(query);
 	        preparedStatement.setString(1, storyTitle);

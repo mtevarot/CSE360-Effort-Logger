@@ -103,7 +103,7 @@ public class EffortLogConsoleController {
         ResultSet resultSet = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
             String query = "SELECT DISTINCT project_name FROM effort_logs";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
@@ -244,7 +244,7 @@ public class EffortLogConsoleController {
         PreparedStatement preparedStatement = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
             String query = "INSERT INTO effort_logs (project_name, life_cycle_step, effort_category, project_type, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(query);
 

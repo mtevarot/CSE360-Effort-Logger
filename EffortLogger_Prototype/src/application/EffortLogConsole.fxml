@@ -13,11 +13,6 @@
    <children>
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#fcfcfc" height="74.0" layoutX="21.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="867.0" />
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="516.0" layoutX="22.0" layoutY="105.0" stroke="BLACK" strokeType="INSIDE" width="867.0" />
-      <Label layoutX="238.0" layoutY="33.0" prefHeight="55.0" prefWidth="439.0" text="EFFORT LOGGER CONSOLE">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
       <Button fx:id="startActivity" layoutX="152.0" layoutY="145.0" mnemonicParsing="false" onAction="#startActivity" prefHeight="39.0" prefWidth="237.0" text="Start An Activity">
          <font>
             <Font size="18.0" />
@@ -128,5 +123,10 @@
       </Label>
       <Button fx:id="backButton" layoutX="35.0" layoutY="629.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="203.0" text="Back" />
       <ComboBox fx:id="projectField" editable="true" layoutX="77.0" layoutY="282.0" prefHeight="25.0" prefWidth="351.0" />
+      <Label alignment="CENTER" layoutX="21.0" layoutY="19.0" prefHeight="74.0" prefWidth="867.0" text="EFFORT LOGGER CONSOLE">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
