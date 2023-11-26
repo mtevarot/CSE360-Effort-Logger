@@ -105,9 +105,7 @@ public class EffortLogConsoleController {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
             String query = "SELECT DISTINCT project_name FROM effort_logs WHERE user_id = ?";
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, CurrentUser.getUserId());
-            
+            preparedStatement = connection.prepareStatement(query);       
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -221,8 +219,7 @@ public class EffortLogConsoleController {
             clockText.setText("CLOCK IS STOPPED");
 
             stopTime = LocalDateTime.now();
-            	
-            int userId = CurrentUser.getUserId();
+          
             
             saveTime(startTime, stopTime);
             saveEffortLogData(
@@ -231,8 +228,7 @@ public class EffortLogConsoleController {
                 projectField2.getText(),
                 projectField3.getText(),
                 startTime,
-                stopTime,
-                userId 
+                stopTime
             );
 
             projectField.setPromptText("");
@@ -244,13 +240,13 @@ public class EffortLogConsoleController {
         }
     }
     
-    public void saveEffortLogData(String projectName, String lifeCycleStep, String effortCategory, String projectType, LocalDateTime startTime, LocalDateTime endTime, int user_id) {
+    public void saveEffortLogData(String projectName, String lifeCycleStep, String effortCategory, String projectType, LocalDateTime startTime, LocalDateTime endTime) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
-            String query = "INSERT INTO effort_logs (project_name, life_cycle_step, effort_category, project_type, start_time, end_time, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO effort_logs (project_name, life_cycle_step, effort_category, project_type, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1, projectName);
@@ -259,7 +255,6 @@ public class EffortLogConsoleController {
             preparedStatement.setString(4, projectType);
             preparedStatement.setTimestamp(5, Timestamp.valueOf(startTime));
             preparedStatement.setTimestamp(6, Timestamp.valueOf(endTime));
-            preparedStatement.setInt(7, user_id);
 
             preparedStatement.executeUpdate();
 

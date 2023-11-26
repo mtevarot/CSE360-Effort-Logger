@@ -85,9 +85,6 @@ public class ViewOldUserStoriesController {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
             String query = "SELECT title FROM user_stories WHERE user_id = ?";
             preparedStatement = connection.prepareStatement(query);
-            
-            preparedStatement.setInt(1, CurrentUser.getUserId());
-
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {

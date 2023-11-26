@@ -84,10 +84,8 @@ package application;
 
 	        try {
 	            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
-	            String query = "SELECT DISTINCT project_name FROM effort_logs where user_id = ?";
+	            String query = "SELECT DISTINCT project_name FROM effort_logs";
 	            preparedStatement = connection.prepareStatement(query);
-	            preparedStatement.setInt(1, CurrentUser.getUserId());
-	            
 	            resultSet = preparedStatement.executeQuery();
 
 	            while (resultSet.next()) {
@@ -112,8 +110,6 @@ package application;
 	        PreparedStatement preparedStatement = null;
 	        ResultSet resultSet = null;
 	        EffortLog effortLog = null;
-	        int userId = CurrentUser.getUserId();
-
 	        try {
 	            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
 	            String query = "SELECT * FROM effort_logs WHERE project_name = ?";
@@ -129,8 +125,7 @@ package application;
 	                    resultSet.getString("effort_category"),
 	                    resultSet.getString("project_type"),
 	                    resultSet.getTimestamp("start_time").toLocalDateTime(),
-	                    resultSet.getTimestamp("end_time").toLocalDateTime(),
-	                    userId 
+	                    resultSet.getTimestamp("end_time").toLocalDateTime()
 	                );
 	            }
 	        } catch (SQLException e) {

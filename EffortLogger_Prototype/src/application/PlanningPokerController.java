@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -34,13 +35,13 @@ public class PlanningPokerController {
 	private ComboBox<String> userStoriesComboBox; 
 	
 	@FXML 
-	private ComboBox<String> userComboBox; 
+	private ComboBox<String> effortLogComboBox; 
 	
 	@FXML 
 	private Button viewUserStoryButton; 
 	
 	@FXML 
-	private Button importDataButton; 
+	private Button viewEffortLogButton; 
 	
 	@FXML 
 	private Button newRoundButton; 
@@ -76,7 +77,7 @@ public class PlanningPokerController {
 	private void initialize() {
 	    Platform.runLater(() -> {
 	        populateUserStoriesDropdown();
-	        populateUsersDropdown(); 
+	        populateEffortLogsDropdown(); 
 	    });
 	}
 	
@@ -121,7 +122,7 @@ public class PlanningPokerController {
 	    delay.setOnFinished(e -> {
 	        alert.close(); 
 	        userStoriesComboBox.setValue(null); 
-	        userComboBox.setValue(null);
+	        effortLogComboBox.setValue(null);
 	    });
 	    delay.play(); 
 	}
@@ -156,20 +157,21 @@ public class PlanningPokerController {
 	    }
 	}
 
-	public void populateUsersDropdown() {
+	public void populateEffortLogsDropdown() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
-            String query = "SELECT firstAndLast FROM users";
+            String query = "SELECT project_name FROM effort_logs";
             preparedStatement = connection.prepareStatement(query);
+            
             resultSet = preparedStatement.executeQuery();
 
-            userComboBox.getItems().clear();
+            effortLogComboBox.getItems().clear();
             
             while (resultSet.next()) {
-            	userComboBox.getItems().add(resultSet.getString("firstAndLast"));
+            	effortLogComboBox.getItems().add(resultSet.getString("project_name"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -190,10 +192,8 @@ public class PlanningPokerController {
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
-            String query = "SELECT title FROM user_stories WHERE user_id = ?";
+            String query = "SELECT title FROM user_stories";
             preparedStatement = connection.prepareStatement(query);
-            
-            preparedStatement.setInt(1, CurrentUser.getUserId());
             resultSet = preparedStatement.executeQuery();
 
             userStoriesComboBox.getItems().clear();
@@ -250,27 +250,80 @@ public class PlanningPokerController {
 		alert.showAndWait();
 	}
 	
-	public void importData(ActionEvent event) throws Exception { 
-		if (userComboBox.getValue() == null || userComboBox.getValue().toString().isEmpty()) {
-			showAlert("Error", "Please Select User Before Importing Data.");
-		} else {
-			showDataImportedAlert(); 
-		}
+	public void viewEffortLog(ActionEvent event) {
+	    try {
+	        String selectedLogTitle = effortLogComboBox.getValue();
+	        if (selectedLogTitle == null || selectedLogTitle.isEmpty()) {
+	            showAlert("Error", "Select An Effort Log Before Viewing.");
+	        } else {
+	            EffortLog effortLog = getEffortLogDetails(selectedLogTitle);
+
+	            if (effortLog != null) {
+	                FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewEffortLog.fxml"));
+	                Parent root = loader.load();
+
+	                ViewEffortLogController controller = loader.getController();
+	                controller.displayEffortLog(effortLog);
+
+	                Stage stage = new Stage();
+	                stage.setTitle("Viewing Effort Log: " + selectedLogTitle);
+	                stage.setScene(new Scene(root));
+	                stage.show();
+	            } else {
+	                showAlert("Error", "Effort Log Details Not Found.");
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+		
+	private EffortLog getEffortLogDetails(String logTitle) {
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+	    ResultSet resultSet = null;
+	    EffortLog effortLog = null;
+
+	    try {
+	        connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
+	        String query = "SELECT project_name, life_cycle_step, effort_category, project_type, start_time, end_time FROM effort_logs WHERE project_name = ?";
+	        preparedStatement = connection.prepareStatement(query);
+	        preparedStatement.setString(1, logTitle);
+	        resultSet = preparedStatement.executeQuery();
+
+	        if (resultSet.next()) {
+	        	String projectName = resultSet.getString("project_name");
+	            String lifeCycleStep = resultSet.getString("life_cycle_step");
+	            String effortCategory = resultSet.getString("effort_category");
+	            String projectType = resultSet.getString("project_type");
+	            LocalDateTime startTime = resultSet.getTimestamp("start_time").toLocalDateTime();
+	            LocalDateTime endTime = resultSet.getTimestamp("end_time").toLocalDateTime();
+	        	effortLog = new EffortLog(
+        			 projectName,
+                     lifeCycleStep,
+                     effortCategory,
+                     projectType,
+                     startTime,
+                     endTime
+	            );
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        // Close all connections
+	        try {
+	            if (resultSet != null) resultSet.close();
+	            if (preparedStatement != null) preparedStatement.close();
+	            if (connection != null) connection.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return effortLog;
 	}
 	
-	public void showDataImportedAlert() {
-	    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Data has been imported!", ButtonType.OK);
-	    alert.setTitle("Message");
-	    alert.setHeaderText(null); 
-
-	    
-	    Platform.runLater(alert::show);
-
-	    
-	    PauseTransition delay = new PauseTransition(Duration.seconds(2));
-	    delay.setOnFinished(event -> alert.close());
-	    delay.play();
-	}
 	
 	private UserStory getUserStoryDetails(String storyTitle) {
 	    Connection connection = null;

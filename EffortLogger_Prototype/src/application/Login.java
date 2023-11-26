@@ -35,9 +35,4 @@ public class Login {
 		}
 		return false; 
 	}
-	
-	public int getUserId(String username) {
-        
-        return MySQLAccess.getUserIdByUsername(username);
-    }
 }

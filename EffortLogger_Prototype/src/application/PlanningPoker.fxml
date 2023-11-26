@@ -17,13 +17,13 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <ComboBox fx:id="userComboBox" layoutX="78.0" layoutY="214.0" prefHeight="25.0" prefWidth="354.0" />
-      <Label layoutX="78.0" layoutY="175.0" prefHeight="25.0" prefWidth="297.0" text="1.  Select User and Import User Data">
+      <ComboBox fx:id="effortLogComboBox" layoutX="78.0" layoutY="214.0" prefHeight="25.0" prefWidth="354.0" />
+      <Label layoutX="78.0" layoutY="175.0" prefHeight="25.0" prefWidth="297.0" text="1. Select Effort Log">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="importDataButton" layoutX="78.0" layoutY="259.0" mnemonicParsing="false" onAction="#importData" prefHeight="25.0" prefWidth="209.0" text="Import Data">
+      <Button fx:id="viewEffortLogButton" layoutX="78.0" layoutY="259.0" mnemonicParsing="false" onAction="#viewEffortLog" prefHeight="25.0" prefWidth="209.0" text="View Effort Log">
          <font>
             <Font size="18.0" />
          </font>
