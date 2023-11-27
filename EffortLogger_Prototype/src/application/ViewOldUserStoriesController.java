@@ -82,8 +82,8 @@ public class ViewOldUserStoriesController {
         ResultSet resultSet = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
-            String query = "SELECT title FROM user_stories WHERE user_id = ?";
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.0.204:3306/effort--logger-logins", "root", "Seba1958");
+            String query = "SELECT title FROM user_stories";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
 
@@ -112,7 +112,7 @@ public class ViewOldUserStoriesController {
         UserStory userStory = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.0.204:3306/effort--logger-logins", "root", "Seba1958");
             String query = "SELECT title, `key words`, description FROM user_stories WHERE title = ?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, storyTitle);

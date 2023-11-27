@@ -83,7 +83,7 @@ package application;
 	        ResultSet resultSet = null;
 
 	        try {
-	            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
+	            connection = DriverManager.getConnection("jdbc:mysql://192.168.0.204:3306/effort--logger-logins", "root", "Seba1958");
 	            String query = "SELECT DISTINCT project_name FROM effort_logs";
 	            preparedStatement = connection.prepareStatement(query);
 	            resultSet = preparedStatement.executeQuery();
@@ -111,7 +111,7 @@ package application;
 	        ResultSet resultSet = null;
 	        EffortLog effortLog = null;
 	        try {
-	            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort--logger-logins", "root", "Seba1958");
+	            connection = DriverManager.getConnection("jdbc:mysql://192.168.0.204:3306/effort--logger-logins", "root", "Seba1958");
 	            String query = "SELECT * FROM effort_logs WHERE project_name = ?";
 	            preparedStatement = connection.prepareStatement(query);
 	            preparedStatement.setString(1, projectName);

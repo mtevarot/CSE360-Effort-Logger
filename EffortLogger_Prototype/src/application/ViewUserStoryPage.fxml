@@ -32,7 +32,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextArea fx:id="descriptionArea" editable="false" layoutX="82.0" layoutY="309.0" prefHeight="251.0" prefWidth="835.0">
+      <TextArea fx:id="descriptionArea" editable="false" layoutX="82.0" layoutY="309.0" prefHeight="251.0" prefWidth="835.0" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>

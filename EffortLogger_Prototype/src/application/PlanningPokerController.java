@@ -162,7 +162,7 @@ public class PlanningPokerController {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.0.204:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
             String query = "SELECT project_name FROM effort_logs";
             preparedStatement = connection.prepareStatement(query);
             
@@ -191,7 +191,7 @@ public class PlanningPokerController {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.0.204:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
             String query = "SELECT title FROM user_stories";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
@@ -286,7 +286,7 @@ public class PlanningPokerController {
 	    EffortLog effortLog = null;
 
 	    try {
-	        connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
+	        connection = DriverManager.getConnection("jdbc:mysql://192.168.0.204:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
 	        String query = "SELECT project_name, life_cycle_step, effort_category, project_type, start_time, end_time FROM effort_logs WHERE project_name = ?";
 	        preparedStatement = connection.prepareStatement(query);
 	        preparedStatement.setString(1, logTitle);
@@ -332,7 +332,7 @@ public class PlanningPokerController {
 	    UserStory userStory = null;
 
 	    try {
-	        connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
+	        connection = DriverManager.getConnection("jdbc:mysql://192.168.0.204:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
 	        String query = "SELECT title, `key words`, description FROM user_stories WHERE title = ?";
 	        preparedStatement = connection.prepareStatement(query);
 	        preparedStatement.setString(1, storyTitle);

@@ -75,6 +75,22 @@ public class EffortLogConsoleController {
         populateProjectField();
     }
     
+    public boolean allFieldsFilled() {
+        if (projectField.getValue() == null || 
+            !isSplitMenuButtonSelected(projectField1) ||
+            !isSplitMenuButtonSelected(projectField2) ||
+            !isSplitMenuButtonSelected(projectField3)) {
+            
+            showAlert("Error", "Please ensure all fields are filled before stopping activity.");
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean isSplitMenuButtonSelected(SplitMenuButton button) {
+        return button.getText() != null && !button.getText().isEmpty();
+    }
+    
     public void populateProjectField() {
         ObservableList<String> projectTitles = getProjectTitlesFromDatabase();
         projectField.setItems(projectTitles);
@@ -103,8 +119,8 @@ public class EffortLogConsoleController {
         ResultSet resultSet = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
-            String query = "SELECT DISTINCT project_name FROM effort_logs WHERE user_id = ?";
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.0.204:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
+            String query = "SELECT DISTINCT project_name FROM effort_logs";
             preparedStatement = connection.prepareStatement(query);       
             resultSet = preparedStatement.executeQuery();
 
@@ -215,26 +231,28 @@ public class EffortLogConsoleController {
     
     public void stopActivity() {
         if (clockStatus()) {
-            clock.setFill(Color.RED);
-            clockText.setText("CLOCK IS STOPPED");
-
-            stopTime = LocalDateTime.now();
-          
-            
-            saveTime(startTime, stopTime);
-            saveEffortLogData(
-                projectField.getEditor().getText(),
-                projectField1.getText(),
-                projectField2.getText(),
-                projectField3.getText(),
-                startTime,
-                stopTime
-            );
-
-            projectField.setPromptText("");
-            projectField1.setText("");
-            projectField2.setText("");
-            projectField3.setText("");
+        	if(allFieldsFilled()) {
+	            clock.setFill(Color.RED);
+	            clockText.setText("CLOCK IS STOPPED");
+	
+	            stopTime = LocalDateTime.now();
+	          
+	            
+	            saveTime(startTime, stopTime);
+	            saveEffortLogData(
+	                projectField.getEditor().getText(),
+	                projectField1.getText(),
+	                projectField2.getText(),
+	                projectField3.getText(),
+	                startTime,
+	                stopTime
+	            );
+	
+	            projectField.setPromptText("");
+	            projectField1.setText("");
+	            projectField2.setText("");
+	            projectField3.setText("");
+        	}
         } else {
             showAlert("Error", "Start an Activity First!");
         }
@@ -245,7 +263,7 @@ public class EffortLogConsoleController {
         PreparedStatement preparedStatement = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.0.204:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
             String query = "INSERT INTO effort_logs (project_name, life_cycle_step, effort_category, project_type, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(query);
 

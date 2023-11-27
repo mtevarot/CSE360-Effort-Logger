@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -34,7 +35,7 @@ public class UserStoryPageController {
 	private TextField keyWordsField; 
 	
 	@FXML 
-	private TextField descriptionField; 
+	private TextArea descriptionField; 
 	
 	@FXML 
 	private Button createStoryButton; 

@@ -21,7 +21,7 @@ public class MySQLAccess {
         
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.0.204:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
             
             userExists = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
             
@@ -60,7 +60,7 @@ public class MySQLAccess {
     	ResultSet resultSet = null; 
     	
     	try { 
-            connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.0.204:3306/effort--logger-logins", "matteoteva", "Seba1958"); 
             
             String sql = "INSERT INTO user_stories (title, `key words`, description) VALUES (?, ?, ?)";
             psInsert = connection.prepareStatement(sql);
@@ -91,7 +91,7 @@ public class MySQLAccess {
         ResultSet resultSet = null; 
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://192.168.7.95:3306/effort--logger-logins", "matteoteva", "Seba1958");
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.0.204:3306/effort--logger-logins", "matteoteva", "Seba1958");
             preparedStatement = connection.prepareStatement("SELECT password FROM users WHERE username = ?");
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
