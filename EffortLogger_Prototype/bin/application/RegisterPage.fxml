@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1015.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RegisterPageController">
+   <children>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="627.0" layoutX="34.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="943.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="102.0" layoutX="259.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" width="499.0" />
+      <TextField fx:id="firstNameField" layoutX="314.0" layoutY="216.0" prefHeight="36.0" prefWidth="393.0" />
+      <Label layoutX="314.0" layoutY="171.0" prefHeight="45.0" prefWidth="194.0" text="First and Last Name:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="314.0" layoutY="267.0" prefHeight="45.0" prefWidth="194.0" text="Username:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="title" alignment="CENTER" layoutX="261.0" layoutY="50.0" prefHeight="102.0" prefWidth="491.0" text="Create An Account">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Button fx:id="cancelButton" layoutX="758.0" layoutY="582.0" mnemonicParsing="false" onAction="#backToLoginPage" prefHeight="45.0" prefWidth="152.0" text="Cancel">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="registerButton" layoutX="555.0" layoutY="582.0" mnemonicParsing="false" onAction="#register" prefHeight="45.0" prefWidth="152.0" text="Create Account">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Label layoutX="314.0" layoutY="375.0" prefHeight="45.0" prefWidth="194.0" text="Password:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passwordField" layoutX="314.0" layoutY="420.0" prefHeight="36.0" prefWidth="393.0" />
+      <Label layoutX="314.0" layoutY="465.0" prefHeight="45.0" prefWidth="194.0" text="Confirm Password: ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passwordField1" layoutX="314.0" layoutY="510.0" prefHeight="36.0" prefWidth="393.0" />
+      <TextField fx:id="usernameField" layoutX="311.0" layoutY="325.0" prefHeight="36.0" prefWidth="393.0" />
+   </children>
+</AnchorPane>

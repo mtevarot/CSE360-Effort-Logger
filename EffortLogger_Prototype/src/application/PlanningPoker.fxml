@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1015.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PlanningPokerController">
+   <children>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="633.0" layoutX="14.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" width="962.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="102.0" layoutX="46.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" width="902.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="474.0" layoutX="46.0" layoutY="161.0" stroke="BLACK" strokeType="INSIDE" width="902.0" />
+      <Label fx:id="title" alignment="CENTER" layoutX="46.0" layoutY="43.0" prefHeight="102.0" prefWidth="902.0" text="Planning Poker">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="effortLogComboBox" layoutX="78.0" layoutY="214.0" prefHeight="25.0" prefWidth="354.0" />
+      <Label layoutX="78.0" layoutY="175.0" prefHeight="25.0" prefWidth="297.0" text="1. Select Effort Log">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="viewEffortLogButton" layoutX="78.0" layoutY="259.0" mnemonicParsing="false" onAction="#viewEffortLog" prefHeight="25.0" prefWidth="209.0" text="View Effort Log">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="viewUserStoryButton" layoutX="525.0" layoutY="259.0" mnemonicParsing="false" onAction="#viewUserStory" prefHeight="25.0" prefWidth="209.0" text="View User Story">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="525.0" layoutY="175.0" prefHeight="25.0" prefWidth="297.0" text="2.  Select User Story ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="userStoriesComboBox" layoutX="525.0" layoutY="214.0" prefHeight="25.0" prefWidth="354.0" />
+      <Button fx:id="button1" layoutX="58.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="1">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="button2" layoutX="146.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="2">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="button4" layoutX="324.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="4">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="button3" layoutX="235.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="3">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="button8" layoutX="680.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="8">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="button7" layoutX="593.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="7">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="button6" layoutX="497.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="6">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="button5" layoutX="408.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="5">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="button9" layoutX="768.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" text="9">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="button10" layoutX="855.0" layoutY="347.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="73.0" style="-fx-padding: 0;" text="10">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Button>
+      <Label layoutX="80.0" layoutY="318.0" text="3.  After Reading User Stories, Select an Estimate. ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="73.0" layoutY="469.0" text="4.  After Selecting an Estimate, click the  &quot;Generate an Estimate Button&quot;, to see others estimates">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="generateEstimateButton" layoutX="110.0" layoutY="502.0" mnemonicParsing="false" onAction="#generateEstimate" prefHeight="25.0" prefWidth="209.0" text="Generate an Estimate">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="73.0" layoutY="553.0" text="5.  If the estimate is the same, select&quot; End Planning Poker&quot;, otherwise select &quot;Next Round.&quot;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="endMeetingButton" layoutX="110.0" layoutY="584.0" mnemonicParsing="false" onAction="#meetingEnded" prefHeight="39.0" prefWidth="354.0" text="End Planning Poker Meeting">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="newRoundButton" layoutX="503.0" layoutY="584.0" mnemonicParsing="false" onAction="#newRound" prefHeight="39.0" prefWidth="354.0" text="Next Round">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="backButton" layoutX="58.0" layoutY="655.0" mnemonicParsing="false" onAction="#handleBackAction" prefHeight="25.0" prefWidth="203.0" text="Back" />
+   </children>
+</AnchorPane>
