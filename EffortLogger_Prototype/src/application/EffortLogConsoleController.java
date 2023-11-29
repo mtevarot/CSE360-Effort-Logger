@@ -76,28 +76,28 @@ public class EffortLogConsoleController {
         
         projectField.showingProperty().addListener((obs, wasShowing, isNowShowing) -> {
 	        if (isNowShowing && !clockStatus()) {
-	            showAlert("Error", "Select a project first.");
+	            showAlert("Error", "Start an Activity First!");
 	            projectField.hide(); 
 	        }
 	    });
         
         projectField1.showingProperty().addListener((obs, wasShowing, isNowShowing) -> {
 	        if (isNowShowing && !clockStatus()) {
-	            showAlert("Error", "Select a project first.");
+	            showAlert("Error", "Start an Activity First!");
 	            projectField1.hide(); 
 	        }
 	    });
         
         projectField2.showingProperty().addListener((obs, wasShowing, isNowShowing) -> {
 	        if (isNowShowing && !clockStatus()) {
-	            showAlert("Error", "Select a project first.");
+	            showAlert("Error", "Start an Activity First!");
 	            projectField2.hide(); 
 	        }
 	    });
         
         projectField3.showingProperty().addListener((obs, wasShowing, isNowShowing) -> {
 	        if (isNowShowing && !clockStatus()) {
-	            showAlert("Error", "Select a project first.");
+	            showAlert("Error", "Start an Activity First!");
 	            projectField3.hide(); 
 	        }
 	    });
@@ -150,7 +150,7 @@ public class EffortLogConsoleController {
 
         try {
         	connection = DriverManager.getConnection(DATABASE_URL);
-            String query = "SELECT project_name FROM effort_logs";
+            String query = "SELECT DISTINCT project_name FROM effort_logs";
             preparedStatement = connection.prepareStatement(query);       
             resultSet = preparedStatement.executeQuery();
 
@@ -278,7 +278,7 @@ public class EffortLogConsoleController {
 	                stopTime
 	            );
 	
-	            projectField.setPromptText("");
+	            projectField.setValue(null);
 	            projectField1.setText("");
 	            projectField2.setText("");
 	            projectField3.setText("");
