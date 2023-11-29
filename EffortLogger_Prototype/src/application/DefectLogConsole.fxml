@@ -92,7 +92,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="704.0" layoutY="319.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="176.0" text="Reopen">
+      <Button layoutX="693.0" layoutY="319.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="176.0" text="Reopen">
          <font>
             <Font size="18.0" />
          </font>

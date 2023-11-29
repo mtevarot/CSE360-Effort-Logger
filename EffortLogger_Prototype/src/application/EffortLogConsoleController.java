@@ -73,6 +73,34 @@ public class EffortLogConsoleController {
     @FXML
     public void initialize() {
         populateProjectField();
+        
+        projectField.showingProperty().addListener((obs, wasShowing, isNowShowing) -> {
+	        if (isNowShowing && !clockStatus()) {
+	            showAlert("Error", "Select a project first.");
+	            projectField.hide(); 
+	        }
+	    });
+        
+        projectField1.showingProperty().addListener((obs, wasShowing, isNowShowing) -> {
+	        if (isNowShowing && !clockStatus()) {
+	            showAlert("Error", "Select a project first.");
+	            projectField1.hide(); 
+	        }
+	    });
+        
+        projectField2.showingProperty().addListener((obs, wasShowing, isNowShowing) -> {
+	        if (isNowShowing && !clockStatus()) {
+	            showAlert("Error", "Select a project first.");
+	            projectField2.hide(); 
+	        }
+	    });
+        
+        projectField3.showingProperty().addListener((obs, wasShowing, isNowShowing) -> {
+	        if (isNowShowing && !clockStatus()) {
+	            showAlert("Error", "Select a project first.");
+	            projectField3.hide(); 
+	        }
+	    });
     }
     
     private static final String DATABASE_URL = "jdbc:sqlite:C:/Users/matte/School/CSE 360/Effort Logger Database/effortLoggerDatabase.db";
@@ -122,7 +150,7 @@ public class EffortLogConsoleController {
 
         try {
         	connection = DriverManager.getConnection(DATABASE_URL);
-            String query = "SELECT DISTINCT project_name FROM effort_logs";
+            String query = "SELECT project_name FROM effort_logs";
             preparedStatement = connection.prepareStatement(query);       
             resultSet = preparedStatement.executeQuery();
 

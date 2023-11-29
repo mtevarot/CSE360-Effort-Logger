@@ -86,12 +86,14 @@ package application;
 
 	        try {
 	        	connection = DriverManager.getConnection(DATABASE_URL);
-	            String query = "SELECT DISTINCT project_name FROM effort_logs";
+	            String query = "SELECT project_name, start_time, end_time FROM effort_logs";
 	            preparedStatement = connection.prepareStatement(query);
 	            resultSet = preparedStatement.executeQuery();
 
 	            while (resultSet.next()) {
-	                titles.add(resultSet.getString("project_name"));
+	                titles.add(resultSet.getString("project_name") + "  --->  "
+	                		+ resultSet.getString("start_time") + " | "
+	                		+  resultSet.getString("end_time"));
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -107,16 +109,29 @@ package application;
 	        return titles;
 	    }
 	    
-	    public EffortLog getEffortLogDetails(String projectName) {
+	    public EffortLog getEffortLogDetails(String logEntry) {
+	    	String[] parts = logEntry.split("  --->  | \\| ");
+	        if(parts.length < 3) {
+	            System.out.println("Error parsing log entry: " + logEntry);
+	            return null;
+	        }
+
+	        String projectName = parts[0].trim();
+	        String startTime = parts[1].trim();
+	        String endTime = parts[2].trim();
+
 	        Connection connection = null;
 	        PreparedStatement preparedStatement = null;
 	        ResultSet resultSet = null;
 	        EffortLog effortLog = null;
+
 	        try {
-	        	connection = DriverManager.getConnection(DATABASE_URL);
-	            String query = "SELECT * FROM effort_logs WHERE project_name = ?";
+	            connection = DriverManager.getConnection(DATABASE_URL);
+	            String query = "SELECT * FROM effort_logs WHERE project_name = ? AND start_time = ? AND end_time = ?";
 	            preparedStatement = connection.prepareStatement(query);
 	            preparedStatement.setString(1, projectName);
+	            preparedStatement.setString(2, startTime);
+	            preparedStatement.setString(3, endTime);
 	            resultSet = preparedStatement.executeQuery();
 
 	            if (resultSet.next()) {
