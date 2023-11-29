@@ -24,6 +24,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar;
 import javafx.event.ActionEvent;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 public class PlanningPokerController {
@@ -160,33 +164,43 @@ public class PlanningPokerController {
 	}
 
 	public void populateEffortLogsDropdown() {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-        	connection = DriverManager.getConnection(DATABASE_URL);
-            String query = "SELECT project_name FROM effort_logs";
-            preparedStatement = connection.prepareStatement(query);
-            
-            resultSet = preparedStatement.executeQuery();
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+	    ResultSet resultSet = null;
+	    try {
+	        connection = DriverManager.getConnection(DATABASE_URL);
+	        String query = "SELECT project_name, start_time, end_time FROM effort_logs";
+	        preparedStatement = connection.prepareStatement(query);
+	        
+	        resultSet = preparedStatement.executeQuery();
 
-            effortLogComboBox.getItems().clear();
-            
-            while (resultSet.next()) {
-            	effortLogComboBox.getItems().add(resultSet.getString("project_name"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-        	try {
-                if (resultSet != null) resultSet.close();
-                if (preparedStatement != null) preparedStatement.close();
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+	        List<String> entries = new ArrayList<>();
+	        
+	        while (resultSet.next()) {
+	            String entry = resultSet.getString("project_name") + "  --->  "
+	                           + resultSet.getString("start_time") + " | "
+	                           + resultSet.getString("end_time");
+	            entries.add(entry);
+	        }
+
+	        Collections.sort(entries); 
+	        effortLogComboBox.getItems().clear();
+	        effortLogComboBox.getItems().addAll(entries);
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (resultSet != null) resultSet.close();
+	            if (preparedStatement != null) preparedStatement.close();
+	            if (connection != null) connection.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
+
 	
 	public void populateUserStoriesDropdown() {
         Connection connection = null;
