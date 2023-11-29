@@ -62,6 +62,9 @@ public class EffortLogEditorController {
     @FXML 
     private Button deleteLogButton;
     
+    @FXML 
+    private Button splitButton;
+    
 	@FXML
 	private void initialize() {
 	    Platform.runLater(() -> {
@@ -73,6 +76,12 @@ public class EffortLogEditorController {
 	            populateSecondEffortLogsDropdown(newValue.toString());
 	        } else {
 	            effortLogComboBox2.getItems().clear();
+	        }
+	    });
+	    
+	    effortLogComboBox2.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+	        if (newValue != null) {
+	            fillLogDetails(newValue);
 	        }
 	    });
 	    
@@ -232,7 +241,12 @@ public class EffortLogEditorController {
         String newDate = dateField.getText();
         String newStartTime = newDate + " " + startField.getText();
         String newEndTime = newDate + " " + stopField.getText();
-
+        
+        if (!isTimeFormatCorrect(startField.getText()) || !isTimeFormatCorrect(stopField.getText())) {
+            showAlert("Error", "Time must be in the format HH:mm:ss.");
+            return;
+        }
+        
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -268,7 +282,8 @@ public class EffortLogEditorController {
             }
         }
         
-        clearLogs();  
+        initialize();
+        clearLogs();
     }
 
     public void deleteLog(ActionEvent event) {
@@ -367,6 +382,80 @@ public class EffortLogEditorController {
 	    stopField.setText(""); 
 	}
 	
+	public void fillLogDetails(String logDetail) {
+	    String[] logParts = logDetail.split(" - ");
+	    if (logParts.length >= 6) {
+	        projectField1.setText(logParts[1]); // life cycle step
+	        projectField2.setText(logParts[2]); // effort category
+	        projectField3.setText(logParts[3]); // project type
+
+	        LocalDateTime startTime = LocalDateTime.parse(logParts[4], formatter);
+	        LocalDateTime endTime = LocalDateTime.parse(logParts[5], formatter);
+	        
+	        dateField.setText(startTime.toLocalDate().toString());
+	        startField.setText(startTime.toLocalTime().toString());
+	        stopField.setText(endTime.toLocalTime().toString());
+	    }
+	}
 	
+	public void split(ActionEvent event) {
+	    // Extract values from input fields
+	    String projectName = effortLogComboBox.getValue();
+	    String lifeCycleStep = projectField1.getText(); 
+	    String effortCategory = projectField2.getText(); 
+	    String projectType = projectField3.getText(); 
+	    String date = dateField.getText();
+	    String startTime = startField.getText();
+	    String endTime = stopField.getText();
+	    
+	    // Build the new log's start and end time
+	    String newStartTime = date + " " + startTime;
+	    String newEndTime = date + " " + endTime;
+
+	    // Database connection and SQL preparation
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+
+	    try {
+	        connection = DriverManager.getConnection(DATABASE_URL);
+	        String insertQuery = "INSERT INTO effort_logs (project_name, life_cycle_step, effort_category, project_type, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?)";
+	        preparedStatement = connection.prepareStatement(insertQuery);
+
+	        // Set parameters for the insert query
+	        preparedStatement.setString(1, projectName);
+	        preparedStatement.setString(2, lifeCycleStep);
+	        preparedStatement.setString(3, effortCategory);
+	        preparedStatement.setString(4, projectType);
+	        preparedStatement.setString(5, newStartTime);
+	        preparedStatement.setString(6, newEndTime);
+
+	        // Execute the insert query
+	        int rowsAffected = preparedStatement.executeUpdate();
+	        if (rowsAffected > 0) {
+	            showSuccess("Success", "Log split successfully.");
+	        } else {
+	            showAlert("Error", "Failed to create new log.");
+	        }
+	    } catch (SQLException e) {
+	        showAlert("Error", "Database error: " + e.getMessage());
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (preparedStatement != null) preparedStatement.close();
+	            if (connection != null) connection.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    initialize();
+	    clearLogs();
+	}
+	
+	//format time for database
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	
+	//make sure time has two initial digits
+	private boolean isTimeFormatCorrect(String time) {
+		return time.matches("\\d{2}:\\d{2}:\\d{2}");
+	}
 }

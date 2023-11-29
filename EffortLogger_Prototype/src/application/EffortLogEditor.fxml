@@ -82,7 +82,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="51.0" layoutY="561.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="383.0" text="Split this into Two Entries">
+      <Button fx:id="splitButton" layoutX="51.0" layoutY="561.0" mnemonicParsing="false" onAction="#split" prefHeight="39.0" prefWidth="383.0" text="Split this into Two Entries">
          <font>
             <Font size="18.0" />
          </font>
@@ -137,5 +137,6 @@
             <MenuItem mnemonicParsing="false" onAction="#menuItemAction3" text="Implementation Plan" />
          </items>
       </SplitMenuButton>
+      <Label layoutX="695.0" layoutY="339.0" text="Please format it as: HH:mm:ss" />
    </children>
 </AnchorPane>

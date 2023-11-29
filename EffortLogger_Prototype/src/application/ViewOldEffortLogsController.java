@@ -111,11 +111,7 @@ package application;
 	    
 	    public EffortLog getEffortLogDetails(String logEntry) {
 	    	String[] parts = logEntry.split("  --->  | \\| ");
-	        if(parts.length < 3) {
-	            System.out.println("Error parsing log entry: " + logEntry);
-	            return null;
-	        }
-
+	    	
 	        String projectName = parts[0].trim();
 	        String startTime = parts[1].trim();
 	        String endTime = parts[2].trim();
