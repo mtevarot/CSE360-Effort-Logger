@@ -302,26 +302,32 @@ public class PlanningPokerController {
 	    EffortLog effortLog = null;
 
 	    try {
-	    	connection = DriverManager.getConnection(DATABASE_URL);
-	        String query = "SELECT project_name, life_cycle_step, effort_category, project_type, start_time, end_time FROM effort_logs WHERE project_name = ?";
+	        String[] logParts = logTitle.split("  --->  | \\| ");
+	        String projectName = logParts[0];
+	        String startTimeString = logParts[1];
+	        String endTimeString = logParts[2];
+
+	        connection = DriverManager.getConnection(DATABASE_URL);
+	        String query = "SELECT * FROM effort_logs WHERE project_name = ? AND start_time = ? AND end_time = ?";
 	        preparedStatement = connection.prepareStatement(query);
-	        preparedStatement.setString(1, logTitle);
+	        preparedStatement.setString(1, projectName);
+	        preparedStatement.setString(2, startTimeString);
+	        preparedStatement.setString(3, endTimeString);
 	        resultSet = preparedStatement.executeQuery();
 
 	        if (resultSet.next()) {
-	        	String projectName = resultSet.getString("project_name");
 	            String lifeCycleStep = resultSet.getString("life_cycle_step");
 	            String effortCategory = resultSet.getString("effort_category");
 	            String projectType = resultSet.getString("project_type");
 	            LocalDateTime startTime = resultSet.getTimestamp("start_time").toLocalDateTime();
 	            LocalDateTime endTime = resultSet.getTimestamp("end_time").toLocalDateTime();
-	        	effortLog = new EffortLog(
-        			 projectName,
-                     lifeCycleStep,
-                     effortCategory,
-                     projectType,
-                     startTime,
-                     endTime
+	            effortLog = new EffortLog(
+	                    projectName,
+	                    lifeCycleStep,
+	                    effortCategory,
+	                    projectType,
+	                    startTime,
+	                    endTime
 	            );
 	        }
 	    } catch (SQLException e) {
@@ -339,6 +345,7 @@ public class PlanningPokerController {
 
 	    return effortLog;
 	}
+
 	
 	
 	private UserStory getUserStoryDetails(String storyTitle) {
