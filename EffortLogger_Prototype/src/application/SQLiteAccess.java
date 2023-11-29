@@ -109,10 +109,11 @@ public class SQLiteAccess  {
                             e.printStackTrace();
                         }
            			 return true; 
+           		 } else {
+           			showAlert("Error", "Incorrect username or password, please try again."); 
            		 }
            	 }
             }
-            showAlert("Error", "Incorrect username or password, please try again.");
         } catch (Exception e) {
             throw e;
         } finally {

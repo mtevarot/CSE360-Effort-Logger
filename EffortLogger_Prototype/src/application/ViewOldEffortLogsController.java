@@ -7,7 +7,8 @@ package application;
 	import java.sql.ResultSet;
 	import java.sql.SQLException;
 	import java.util.ArrayList;
-	import java.util.List;
+import java.util.Collections;
+import java.util.List;
 	import java.util.Optional;
 
 	import javafx.application.Platform;
@@ -95,6 +96,9 @@ package application;
 	                		+ resultSet.getString("start_time") + " | "
 	                		+  resultSet.getString("end_time"));
 	            }
+	            
+	            Collections.sort(titles);
+	            
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        } finally {
