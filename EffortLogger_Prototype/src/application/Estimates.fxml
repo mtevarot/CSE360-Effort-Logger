@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="application.EstimateDisplayController">
+    <TableView fx:id="guessTableView" prefHeight="400.0" prefWidth="279.0">
+        <columns>
+            <TableColumn fx:id="employeeNameColumn" prefWidth="158.0" text="Employee Name" />
+            <TableColumn fx:id="guessColumn" minWidth="2.0" prefWidth="120.0" text="Estimates" />
+        </columns>
+    </TableView>
+</AnchorPane>

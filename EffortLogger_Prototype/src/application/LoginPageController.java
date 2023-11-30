@@ -31,6 +31,7 @@ public class LoginPageController {
             boolean loginSuccessful = login.validateLogin(usernameField.getText(), passwordField.getText());
 
             if (loginSuccessful) {
+            	UserSession.setLoggedInUserName(usernameField.getText());
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EffortLoggerV2Homepage.fxml"));
                 Parent effortLoggerV2HomepageRoot = fxmlLoader.load();
                 

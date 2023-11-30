@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -80,9 +81,33 @@ public class PlanningPokerController {
 	@FXML
 	private void initialize() {
 	    Platform.runLater(() -> {
+	    	clearGuesses();
 	        populateUserStoriesDropdown();
 	        populateEffortLogsDropdown(); 
 	    });
+	}
+	
+	@FXML
+	public void guessSelected(ActionEvent event) {
+	    if (event.getSource() instanceof Button) {
+	        String employeeName = UserSession.getLoggedInUserName();
+	        Button clickedButton = (Button) event.getSource();
+	        int guess = Integer.parseInt(clickedButton.getText());
+
+	        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+	        alert.setTitle("Confirmation");
+	        alert.setHeaderText("You have selected " + guess + " as your estimate, Are you sure?");
+
+	        ButtonType buttonTypeYes = new ButtonType("Yes");
+	        ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+	        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+	        Optional<ButtonType> result = alert.showAndWait();
+
+	        if (result.isPresent() && result.get() == buttonTypeYes) {
+	            saveGuess(employeeName, guess);
+	        }
+	    }
 	}
 	
 	private static final String DATABASE_URL = "jdbc:mysql://162.248.102.123:3306/eflDatabase";
@@ -111,26 +136,111 @@ public class PlanningPokerController {
 	}
 	
 	public void generateEstimate() {
-		int estimate = (int)(Math.random() * 10) + 1;
-		Alert alert = new Alert(Alert.AlertType.INFORMATION, "Generated Estimate: " + estimate);
-	    alert.setTitle("Message");
-	    alert.setHeaderText(null); 
+	    try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("Estimates.fxml"));
+	        Parent root = loader.load();
 
-	    alert.show();
+	        EstimateDisplayController controller = loader.getController();
+	        controller.setGuessData(FXCollections.observableArrayList(getAllGuesses()));
+
+	        Stage stage = new Stage();
+	        stage.setTitle("Estimates");
+	        stage.setScene(new Scene(root));
+	        stage.show();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	
+	public void saveGuess(String employeeName, int guess) {
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+
+	    try {
+	        connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+	        String sql = "INSERT INTO planning_poker (employee_name, guess) VALUES (?, ?)";
+	        preparedStatement = connection.prepareStatement(sql);
+	        preparedStatement.setString(1, employeeName);
+	        preparedStatement.setInt(2, guess);
+	        preparedStatement.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace(); 
+	    } finally {
+	        try {
+	            if (preparedStatement != null) preparedStatement.close();
+	            if (connection != null) connection.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	}
 	
+	public List<Guess> getAllGuesses() {
+	    List<Guess> guesses = new ArrayList<>();
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+	    ResultSet resultSet = null;
+
+	    try {
+	        connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+	        String sql = "SELECT employee_name, guess FROM planning_poker";
+	        preparedStatement = connection.prepareStatement(sql);
+	        resultSet = preparedStatement.executeQuery();
+
+	        while (resultSet.next()) {
+	            String employeeName = resultSet.getString("employee_name");
+	            int guess = resultSet.getInt("guess");
+	            guesses.add(new Guess(employeeName, guess));
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (resultSet != null) resultSet.close();
+	            if (preparedStatement != null) preparedStatement.close();
+	            if (connection != null) connection.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return guesses;
+	}
+	
+	public void clearGuesses() {
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+
+	    try {
+	        connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+	        String sql = "DELETE FROM planning_poker";
+	        preparedStatement = connection.prepareStatement(sql);
+	        preparedStatement.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (preparedStatement != null) preparedStatement.close();
+	            if (connection != null) connection.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
 	public void newRound(ActionEvent event) {
+		clearGuesses();
 		Alert alert = new Alert(Alert.AlertType.INFORMATION, "Starting New Round!!");
 	    alert.setTitle("Message");
 	    alert.setHeaderText(null); 
 
 	    alert.show();
 
-	    PauseTransition delay = new PauseTransition(Duration.seconds(1));
+	   PauseTransition delay = new PauseTransition(Duration.seconds(1));
 	    delay.setOnFinished(e -> {
-	        alert.close(); 
-	        userStoriesComboBox.setValue(null); 
-	        effortLogComboBox.setValue(null);
+	       alert.close(); 
+	       userStoriesComboBox.setValue(null); 
+	       effortLogComboBox.setValue(null);
 	    });
 	    delay.play(); 
 	}
@@ -232,7 +342,7 @@ public class PlanningPokerController {
         }
     }
 	
-	public void handleBackAction(ActionEvent event) throws IOException {
+	public void backButtonPressed(ActionEvent event) throws IOException {
 	    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 	    alert.setTitle("Confirmation");
 	    alert.setHeaderText("All data will be lost if you leave, Are you sure?");
@@ -348,8 +458,6 @@ public class PlanningPokerController {
 	    return effortLog;
 	}
 
-	
-	
 	private UserStory getUserStoryDetails(String storyTitle) {
 	    Connection connection = null;
 	    PreparedStatement preparedStatement = null;
