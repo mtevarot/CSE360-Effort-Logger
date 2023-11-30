@@ -44,7 +44,9 @@ public class ViewOldUserStoriesController {
        
     }
 	
-	private static final String DATABASE_URL = "jdbc:sqlite:C:/Users/matte/School/CSE 360/Effort Logger Database/effortLoggerDatabase.db";
+    private static final String DATABASE_URL = "jdbc:mysql://162.248.102.123:3306/eflDatabase";
+    private static final String DATABASE_USER = "matteoteva";
+    private static final String DATABASE_PASSWORD = "Seba1958";
  
 	public void populateUserStoriesListView() {
         List<String> userStoryTitles = getUserStoryTitles();
