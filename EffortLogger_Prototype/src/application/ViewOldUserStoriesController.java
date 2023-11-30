@@ -86,7 +86,7 @@ public class ViewOldUserStoriesController {
         ResultSet resultSet = null;
 
         try {
-        	connection = DriverManager.getConnection(DATABASE_URL);
+        	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
             String query = "SELECT title FROM user_stories";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
@@ -116,7 +116,7 @@ public class ViewOldUserStoriesController {
         UserStory userStory = null;
 
         try {
-        	connection = DriverManager.getConnection(DATABASE_URL);
+        	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
             String query = "SELECT title, `key words`, description FROM user_stories WHERE title = ?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, storyTitle);
