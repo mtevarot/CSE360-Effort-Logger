@@ -75,22 +75,12 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="effortLogEditorButton" layoutX="35.0" layoutY="565.0" mnemonicParsing="false" onAction="#goToEditor" prefHeight="39.0" prefWidth="203.0" text="Effort Log Editor">
+      <Button fx:id="effortLogEditorButton" layoutX="71.0" layoutY="565.0" mnemonicParsing="false" onAction="#goToEditor" prefHeight="39.0" prefWidth="364.0" text="Effort Log Editor">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="defectLogButton" layoutX="249.0" layoutY="565.0" mnemonicParsing="false" onAction="#goToDefectLog" prefHeight="39.0" prefWidth="203.0" text="Defect Log Console">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="461.0" layoutY="565.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="203.0" text="Definitions">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="674.0" layoutY="565.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="203.0" text="Effect and Defect Logs">
+      <Button fx:id="effectLogButton" layoutX="470.0" layoutY="565.0" mnemonicParsing="false" onAction="#goToHistoricalLogs" prefHeight="39.0" prefWidth="364.0" text="View Old Effect Logs">
          <font>
             <Font size="18.0" />
          </font>

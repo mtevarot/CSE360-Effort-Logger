@@ -65,6 +65,9 @@ public class EffortLogConsoleController {
     @FXML
     private Button defectLogButton; 
     
+    @FXML
+    private Button effectLogButton;
+    
     private LocalDateTime startTime; 
     
     private LocalDateTime stopTime; 
@@ -126,21 +129,6 @@ public class EffortLogConsoleController {
         projectField.setItems(projectTitles);
     }
     
-    public void goToDefectLog(ActionEvent event) throws IOException {
-    	if(!clockStatus()) {
-    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DefectLogConsole.fxml"));
-    	    Parent defectLogRoot = fxmlLoader.load();
-    	    
-    	    
-    	    Stage stage = (Stage) defectLogButton.getScene().getWindow();
-    	    stage.setScene(new Scene(defectLogRoot));
-    	    stage.setTitle("Defect Log Console");
-    	    stage.show();
-    	}
-    	else {
-    		showAlert("Error", "End the Activity Before Going to the Defect Log Console!"); 
-    	}
-    }
     
     public ObservableList<String> getProjectTitlesFromDatabase() {
         ObservableList<String> titles = FXCollections.observableArrayList();
@@ -330,6 +318,16 @@ public class EffortLogConsoleController {
     	String startf = start.format(formatter);
     	String stopf = stop.format(formatter);
     }
+    
+    public void goToHistoricalLogs(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewOldEffortLogs.fxml"));
+        Parent effortLogsRoot = fxmlLoader.load();
+        
+        Stage stage = (Stage) effectLogButton.getScene().getWindow();
+        stage.setScene(new Scene(effortLogsRoot));
+        stage.setTitle("Historical Logs");
+        stage.show();
+	}
     
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 }
