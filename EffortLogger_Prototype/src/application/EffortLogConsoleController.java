@@ -106,7 +106,9 @@ public class EffortLogConsoleController {
 	    });
     }
     
-    private static final String DATABASE_URL = "jdbc:sqlite:C:/Users/matte/School/CSE 360/Effort Logger Database/effortLoggerDatabase.db";
+    private static final String DATABASE_URL = "jdbc:mysql://162.248.102.123:3306/eflDatabase";
+    private static final String DATABASE_USER = "matteoteva";
+    private static final String DATABASE_PASSWORD = "Seba1958";
     
     public boolean allFieldsFilled() {
         if (projectField.getValue() == null || 
@@ -137,7 +139,7 @@ public class EffortLogConsoleController {
         ResultSet resultSet = null;
 
         try {
-        	connection = DriverManager.getConnection(DATABASE_URL);
+        	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
             String query = "SELECT DISTINCT project_name FROM effort_logs";
             preparedStatement = connection.prepareStatement(query);       
             resultSet = preparedStatement.executeQuery();
@@ -281,7 +283,8 @@ public class EffortLogConsoleController {
         PreparedStatement preparedStatement = null;
 
         try {
-        	connection = DriverManager.getConnection(DATABASE_URL);
+        	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+        	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
             String query = "INSERT INTO effort_logs (project_name, life_cycle_step, effort_category, project_type, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(query);
 

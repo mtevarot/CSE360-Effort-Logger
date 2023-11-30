@@ -70,7 +70,7 @@ public class UserStoryPageController {
 	public void createStory(ActionEvent event) throws Exception { 
 		if(!titleField.getText().isEmpty() && !keyWordsField.getText().isEmpty() && !descriptionField.getText().isEmpty()) {
 			
-			SQLiteAccess.createUserStory(titleField.getText(), keyWordsField.getText(), descriptionField.getText()); 
+			MySQLAccess.createUserStory(titleField.getText(), keyWordsField.getText(), descriptionField.getText()); 
 			
 			showUserStoryCreatedAlert(); 
 			clearStory(); 

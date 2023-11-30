@@ -29,7 +29,7 @@ public class Login {
 	}
 	
 	public boolean validateLogin(String u, String p) throws Exception {	
-		if(SQLiteAccess.logInUser(u, p))
+		if(MySQLAccess.logInUser(u, p))
 		{
 			return true;
 		}

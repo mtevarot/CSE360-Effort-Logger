@@ -33,7 +33,7 @@ public class RegisterPageController {
 	
 	
 	public void register(ActionEvent event) throws Exception {
-		SQLiteAccess dbAccess = new SQLiteAccess();
+		MySQLAccess dbAccess = new MySQLAccess();
 		
 		if (usernameField.getText().isEmpty() || passwordField.getText().isEmpty() || firstNameField.getText().isEmpty()) { 
 		    showAlert("Error", "Please fill in all fields.");

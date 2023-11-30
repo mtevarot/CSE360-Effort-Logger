@@ -85,7 +85,9 @@ public class PlanningPokerController {
 	    });
 	}
 	
-	private static final String DATABASE_URL = "jdbc:sqlite:C:/Users/matte/School/CSE 360/Effort Logger Database/effortLoggerDatabase.db";
+	private static final String DATABASE_URL = "jdbc:mysql://162.248.102.123:3306/eflDatabase";
+    private static final String DATABASE_USER = "matteoteva";
+    private static final String DATABASE_PASSWORD = "Seba1958";
 	
 	public void meetingEnded() {
 		int estimate = (int)(Math.random() * 10) + 1;
@@ -168,7 +170,7 @@ public class PlanningPokerController {
 	    PreparedStatement preparedStatement = null;
 	    ResultSet resultSet = null;
 	    try {
-	        connection = DriverManager.getConnection(DATABASE_URL);
+	        connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
 	        String query = "SELECT project_name, start_time, end_time FROM effort_logs";
 	        preparedStatement = connection.prepareStatement(query);
 	        
@@ -207,7 +209,7 @@ public class PlanningPokerController {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-        	connection = DriverManager.getConnection(DATABASE_URL);
+        	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
             String query = "SELECT title FROM user_stories";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
@@ -307,7 +309,7 @@ public class PlanningPokerController {
 	        String startTimeString = logParts[1];
 	        String endTimeString = logParts[2];
 
-	        connection = DriverManager.getConnection(DATABASE_URL);
+	        connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
 	        String query = "SELECT * FROM effort_logs WHERE project_name = ? AND start_time = ? AND end_time = ?";
 	        preparedStatement = connection.prepareStatement(query);
 	        preparedStatement.setString(1, projectName);
@@ -355,7 +357,7 @@ public class PlanningPokerController {
 	    UserStory userStory = null;
 
 	    try {
-	    	connection = DriverManager.getConnection(DATABASE_URL);
+	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
 	        String query = "SELECT title, `key words`, description FROM user_stories WHERE title = ?";
 	        preparedStatement = connection.prepareStatement(query);
 	        preparedStatement.setString(1, storyTitle);

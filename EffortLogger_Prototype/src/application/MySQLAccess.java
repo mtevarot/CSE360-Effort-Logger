@@ -9,8 +9,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 
-public class SQLiteAccess  {
-    private static final String DATABASE_URL = "jdbc:sqlite:C:/Users/matte/School/CSE 360/Effort Logger Database/effortLoggerDatabase.db";
+public class MySQLAccess  {
+	private static final String DATABASE_URL = "jdbc:mysql://162.248.102.123:3306/eflDatabase";
+    private static final String DATABASE_USER = "matteoteva";
+    private static final String DATABASE_PASSWORD = "Seba1958";
     Connection connection = null;
     PreparedStatement insert = null; 
     PreparedStatement userExists = null;
@@ -19,9 +21,9 @@ public class SQLiteAccess  {
     
     public void signUpUser(String username, String password, String firstAndLast) throws Exception {
         try {
-        	Class.forName("org.sqlite.JDBC");
+        	Class.forName("com.mysql.cj.jdbc.Driver");
 
-        	connection = DriverManager.getConnection(DATABASE_URL);
+        	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
             userExists = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
             userExists.setString(1, username); 
             resultSet = userExists.executeQuery();
@@ -57,7 +59,7 @@ public class SQLiteAccess  {
     	ResultSet resultSet = null; 
     	
     	try { 
-    		connection = DriverManager.getConnection(DATABASE_URL);
+    		connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
             
             String sql = "INSERT INTO user_stories (title, `key words`, description) VALUES (?, ?, ?)";
             psInsert = connection.prepareStatement(sql);
@@ -88,9 +90,9 @@ public class SQLiteAccess  {
         ResultSet resultSet = null; 
 
         try {
-        	Class.forName("org.sqlite.JDBC");
+        	Class.forName("com.mysql.cj.jdbc.Driver");
         	
-        	connection = DriverManager.getConnection(DATABASE_URL);
+        	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
             preparedStatement = connection.prepareStatement("SELECT password FROM users WHERE username = ?");
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();

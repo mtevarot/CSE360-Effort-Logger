@@ -47,7 +47,10 @@ import java.util.List;
 	        });
 	    }
 	    
-	    private static final String DATABASE_URL = "jdbc:sqlite:C:/Users/matte/School/CSE 360/Effort Logger Database/effortLoggerDatabase.db";
+	    private static final String DATABASE_URL = "jdbc:mysql://162.248.102.123:3306/eflDatabase";
+	    private static final String DATABASE_USER = "matteoteva";
+	    private static final String DATABASE_PASSWORD = "Seba1958";
+	    
 	 
 	    public void populateEffortLogsListView() {
 	        List<String> effortLogTitles = getEffortLogTitles();
@@ -86,7 +89,7 @@ import java.util.List;
 	        ResultSet resultSet = null;
 
 	        try {
-	        	connection = DriverManager.getConnection(DATABASE_URL);
+	        	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
 	            String query = "SELECT project_name, start_time, end_time FROM effort_logs";
 	            preparedStatement = connection.prepareStatement(query);
 	            resultSet = preparedStatement.executeQuery();
@@ -126,7 +129,7 @@ import java.util.List;
 	        EffortLog effortLog = null;
 
 	        try {
-	            connection = DriverManager.getConnection(DATABASE_URL);
+	        	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
 	            String query = "SELECT * FROM effort_logs WHERE project_name = ? AND start_time = ? AND end_time = ?";
 	            preparedStatement = connection.prepareStatement(query);
 	            preparedStatement.setString(1, projectName);
