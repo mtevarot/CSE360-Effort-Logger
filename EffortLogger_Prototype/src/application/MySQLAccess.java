@@ -10,7 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 
 
 public class MySQLAccess  {
-	private static final String DATABASE_URL = "jdbc:mysql://162.248.102.123:3306/eflDatabase";
+    private static final String DATABASE_URL = "jdbc:mysql://162.248.102.123:3306/eflDatabase";
     private static final String DATABASE_USER = "matteoteva";
     private static final String DATABASE_PASSWORD = "Seba1958";
     Connection connection = null;
